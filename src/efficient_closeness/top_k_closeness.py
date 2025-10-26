@@ -1,8 +1,9 @@
+import math
 import networkx as nx
 from collections import defaultdict
 from sketch import Sketch   # ✅ nom correct
 
-def prep(G, k):
+def prep(G):
     # μ = plus petit poids d'arête (1 si non pondéré)
     if nx.get_edge_attributes(G, 'weight'):
         mu = min(data['weight'] for _, _, data in G.edges(data=True))
@@ -47,3 +48,72 @@ def prep(G, k):
                 n=max(n,tau)
 
     return V_hat, S_hat
+
+def schedule(G, V_hat, S_hat):
+    """
+    Construit la table de planification (schedule) :
+      - détermine les sommets sources (PFS)
+      - détermine les sommets dépendants (Δ-PFS)
+    selon les coûts estimés basés sur les sketches.
+    """
+    sources = []       # sommets a exécutés avec PFS
+    optimized = []     # couples (v, p) a exécutés avec optimized-PFS(v,p)
+    gamma=1.79
+    V_hat, S_hat = prep(G)
+    
+    def poids(u, v):
+        return G[u][v].get('weight', 1.0)
+
+    # Fonction count() du sketch
+    def count(v):
+        return V_hat[v].count() if hasattr(V_hat[v], "count") else len(V_hat[v])
+    
+    # Fonction d'estimation de la somme des distances promues
+    def sigma_hat(v, p):
+        c_v = count(v)
+        c_p = count(p)
+        if c_v == 0: 
+            return 0
+        return (
+            poids(v, p) * c_p +
+            S_hat[p] -
+            (c_p / c_v) * S_hat[v]
+        )
+
+    # Fonction d'estimation du nombre de sommets promus
+    def promoted_vertices(v, p):
+        sigma = sigma_hat(v, p)
+        if sigma <= 0: 
+            return 0
+        c_p = count(p)
+        w = poids(v, p)
+        s_p = S_hat[p]
+        return 0.82 * (sigma ** 0.96) * (c_p ** 0.23) * ((w) ** -0.83) * (s_p ** 0.16)
+
+    # Boucle principale : pour chaque sommet, choisir PFS ou optimized-PFS
+    for v in G.nodes():
+        t_v = count(v) * math.log(count(v) + 1)  # coût estimé du PFS
+        best_parent = None
+        best_cost = float('inf')
+
+        # Évaluer le coût optimized-PFS pour chaque voisin prédécesseur
+        preds = G.predecessors(v) if G.is_directed() else G.neighbors(v)
+        for p in preds:
+            new_nodes = max(count(v) - count(p), 0)
+            promoted = promoted_vertices(v, p)
+            V_vp = new_nodes + promoted
+            if V_vp <= 0:
+                continue
+            t_vp = gamma * V_vp * math.log(V_vp + 1)
+            if t_vp < best_cost:
+                best_cost = t_vp
+                best_parent = p
+
+        # Choisir entre PFS ou optimized-PFS
+        if t_v <= best_cost or best_parent is None:
+            sources.append(v)
+        else:
+            optimized.append((v, best_parent))
+
+    return sources, optimized
+
