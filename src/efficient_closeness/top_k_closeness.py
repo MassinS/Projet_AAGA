@@ -225,3 +225,29 @@ def optimized_PFS(G,v, p,L,s,delta_p):
                 if vprime in log_level:
                     heapq.heappush(log_level, (ll, vprime))
     return L, s, delta_v , log_level
+
+def rollback(L, log_level):
+    for n, old_value in log_level.items():
+        if old_value is None:
+            if n in L:
+                del L[n]
+        else:
+            L[n] = old_value
+
+def top_k_closeness(G, k):
+    A={}
+    V = len(G.nodes())
+    V_hat, S_hat = prep(G)
+    S=schedule(G,V_hat,S_hat)
+    for v in Start(S):
+        (L,s,delta_p)=PFS(G,v)
+        process(G,v,L,s,A,S,k,V,delta_p)
+        return A
+
+def process(G,p,L,s,A,S,k,V,delta_p):
+    c_p=(len(L)-1)**2/(V-1)*s
+    A[p]=c_p
+    for v in S[p]:
+        (L,s,log_level)=optimized_PFS(G,v,p,L,s,delta_p)
+        process(G,p,L,s,A,S,k,V,delta_p)
+        rollback(L,log_level)
