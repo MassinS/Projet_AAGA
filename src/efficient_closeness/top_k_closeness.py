@@ -1,7 +1,8 @@
 import math
+import heapq
 import networkx as nx
 from collections import defaultdict
-from sketch import Sketch   # ✅ nom correct
+from Skecth import Sketch   
 
 def prep(G):
     # μ = plus petit poids d'arête (1 si non pondéré)
@@ -114,6 +115,55 @@ def schedule(G, V_hat, S_hat):
             sources.append(v)
         else:
             optimized.append((v, best_parent))
+        S = {}
+        for (v, p) in optimized:
+         if p not in S:
+            S[p] = []
+         S[p].append(v)
 
-    return sources, optimized
+    return S
+def Start(S):
+    all_nodes = set(S.keys()) | {child for children in S.values() for child in children}
+    non_sources = {child for children in S.values() for child in children}
+    sources = list(all_nodes - non_sources)
+    return sources
 
+
+def prune(v,L,s,teta_A,S,delta_v,G):
+    Inf={}
+    Sup={}
+    phi={}
+    m = len(G.nodes())
+    if G.is_directed():
+        path_to_v   = nx.ancestors(G, v)
+        path_from_v = nx.descendants(G, v)
+    else:
+        path_to_v = path_from_v = nx.node_connected_component(G, v)
+    for u in path_to_v:
+        Inf[u]=len(L)
+    for u in path_from_v:
+        Sup[u]=len(L)
+    Q = []
+    heapq.heappush(Q, (0.0, v))
+    while Q:
+        (dist_u, u) = heapq.heappop(Q)
+        sprime=s-((len(L)-Inf[u]*delta_v)-(dist_u*Sup[u]))
+        cprime=((Sup[u]-1))**2/(m-1)*sprime
+        if cprime-teta_A<phi[u]:
+            phi[u]=cprime-teta_A
+            if u in S:  
+             for uprime in S[u]:  
+              w_u = G[u][uprime].get('weight', 1.0)
+              heapq.heappush(Q, (dist_u +  w_u, uprime))
+
+            has_successors = (u in S and len(S[u]) > 0)
+            if (cprime < teta_A) and (not has_successors):
+                # Retirer u des enfants de tous les parents
+                for parent, children in list(S.items()):
+                    if u in children:
+                        children.remove(u)
+
+                # Supprimer la clé u si elle existe
+                if u in S:
+                    del S[u]
+            
