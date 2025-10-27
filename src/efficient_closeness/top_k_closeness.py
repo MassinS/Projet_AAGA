@@ -166,4 +166,62 @@ def prune(v,L,s,teta_A,S,delta_v,G):
                 # Supprimer la clé u si elle existe
                 if u in S:
                     del S[u]
-            
+
+
+
+def PFS(G, v):
+    L = {}               
+    L[v] = 0             
+    s = 0                
+    delta_v = 0          
+    Q = []               
+    heapq.heappush(Q, (0.0, v))
+
+    while Q:
+        (l, n) = heapq.heappop(Q) 
+        s += l
+        delta_v = max(delta_v, l)
+
+        # Pour chaque successeur direct de n
+        for vprime in G.neighbors(n):
+            w = G[n][vprime].get('weight', 1.0)  
+            lprime = l + w
+
+            if vprime not in L:
+                L[vprime] = lprime
+                heapq.heappush(Q, (lprime, vprime))
+
+            elif lprime < L[vprime]:  
+                L[vprime] = lprime
+                heapq.heappush(Q, (lprime, vprime))
+
+    return L, s, delta_v
+
+def optimized_PFS(G,v, p,L,s,delta_p):
+    alpha_p=L[p]
+    w = G[p][v].get('weight', 1.0)
+    alpha_v=alpha_p-w
+    log_level=[]
+    Q=[]
+    heapq.heappush(log_level, (L[v], v))
+    heapq.heappush(Q, (alpha_v, v))
+    L[v]=alpha_v
+    s=s+(len(L)*w)
+    delta_v=delta_p+w
+    while Q:
+        (l, n) = heapq.heappop(Q) 
+        if log_level[n] is None:
+            s=s+(l-alpha_v)
+            delta_v=max(delta_v,l-alpha_v)
+        else:
+            s=s-(log_level[n]-l)
+        for vprime in G.neighbors(n):
+            w = G[n][vprime].get('weight', 1.0)  
+            lprime = l + w
+            ll=log_level[vprime]
+            if ll is None | (lprime < ll):
+                L[vprime]=lprime
+                heapq.heappush(Q, (lprime, vprime))   
+                if vprime in log_level:
+                    heapq.heappush(log_level, (ll, vprime))
+    return L, s, delta_v , log_level
