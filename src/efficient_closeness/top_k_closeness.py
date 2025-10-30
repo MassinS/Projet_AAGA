@@ -1,54 +1,94 @@
 import math
+import time
+from collections import deque
 import heapq
 import networkx as nx
 from collections import defaultdict
-from Skecth import Sketch   
+from efficient_closeness import Sketch   
 
 def prep(G):
-    # μ = plus petit poids d'arête (1 si non pondéré)
-    if nx.get_edge_attributes(G, 'weight'):
-        mu = min(data['weight'] for _, _, data in G.edges(data=True))
-    else:
-        mu = 1.0
+    """
+    PREP (Section V-B du papier SUNYA), version corrigée.
+    Marche pour graphe dirigé (MultiDiGraph) ou non dirigé.
+    Produit:
+      - V_hat[v] ~ estimation du nb de sommets atteignables depuis v
+      - S_hat[v] ~ estimation de la somme des distances depuis v
+    """
 
-    #  Initialisation 
-    n = 0
-    V_hat = {}        # Sketch global de chaque sommet
-    S_hat = {}        # Somme estimée des distances
-    V = defaultdict(dict)  # Sketch par couche : V[v][τ]
+    # 1. Trouver μ = plus petit poids d'arête (évite 0)
+    mu = min(
+        (data.get("weight", 1.0) for _, _, data in G.edges(data=True)),
+        default=1.0
+    )
+    if mu <= 0:
+        mu = 1.0  # sécurité
 
-    #  Phase 1 : initialisation de chaque sommet 
+    # 2. Structures
+    V_hat = {}   # sketch global accumulé par sommet
+    S_hat = {}   # somme estimée des distances
+    # V[x][τ] = sketch à "livrer" à x à distance arrondie τ
+    V = defaultdict(lambda: defaultdict(Sketch.Sketch))
+
+    n = 1  # profondeur max connue pour le moment
+
+    # 3. Init: chaque sommet "se connaît lui-même"
     for v in G.nodes():
-        V_hat[v] = Sketch()
-        V_hat[v].add(v)   
-        S_hat[v] = 0
+        V_hat[v] = Sketch.Sketch()
+        V_hat[v].add(v)
+        S_hat[v] = 0.0
 
-    #  Phase 2 : propagation sur les arêtes 
-        preds = G.predecessors(v) if G.is_directed() else G.neighbors(v)
-        for p in preds:
-         w = G[p][v].get('weight', 1.0)
-         tau = round(w / mu) 
-         if tau not in V[p]:
-            V[p][tau] = Sketch()
-         V[p][tau].merge(V_hat[v])  # union (max registre par registre)
-         n=max(n,tau)
-    # Phase 3 :construction par couche
-    for i in range(0, n, mu):
-       for v in G.nodes():
-          Vprime=V_hat[v].merge(V[v][i])
-          if V_hat[v]!=Vprime:
-             S_hat[v]=S_hat[v]+i*(Vprime.count - V_hat.count)
-             V_hat[v]=Vprime
-             preds = G.predecessors(v) if G.is_directed() else G.neighbors(v)
-             for p in preds:
-                w = G[p][v].get('weight', 1.0)
-                tau = round(((i+w)/w) / mu)
-                if tau not in V[p]:
-                   V[p][tau] = Sketch()
-                V[p][tau].merge(V_hat[v])
-                n=max(n,tau)
+    # 4. Propagation couche 1 (voisins directs)
+    for v in G.nodes():
+        succs = G.successors(v) if G.is_directed() else G.neighbors(v)
+        for succ in succs:
+            w = G[v][succ].get("weight", 1.0)
+            hop = int(math.ceil(w / mu))
+            if hop < 1:
+                hop = 1
+            V[succ][hop].merge(V_hat[v])   # succ reçoit ce que v connaît
+            n = max(n, hop)
+
+    # 5. Expansion par couches croissantes
+    i = 1
+    while i <= n:
+        for v in G.nodes():
+            if i not in V[v]:
+                continue
+
+            # fusionner ce qui "arrive" à v à la couche i
+            Vprime = V_hat[v].clone()
+            Vprime.merge(V[v][i])
+
+            delta = Vprime.count() - V_hat[v].count()
+            if delta > 0:
+                # on met à jour S_hat[v] avec i * (#nouveaux sommets)
+                S_hat[v] += i * delta
+
+                # on adopte le sketch élargi
+                V_hat[v] = Vprime
+
+                # propager cette nouvelle connaissance vers les successeurs
+                succs = G.successors(v) if G.is_directed() else G.neighbors(v)
+                for succ in succs:
+                    w = G[v][succ].get("weight", 1.0)
+                    hop = int(math.ceil(w / mu))
+                    if hop < 1:
+                        hop = 1
+                    new_tau = i + hop
+
+                    # on ajoute AU SUCCESSEUR, et on lui envoie V_hat[v]
+                    V[succ][new_tau].merge(V_hat[v])
+
+                    # mettre à jour la profondeur max
+                    if new_tau > n:
+                        n = new_tau
+        i += 1
+
 
     return V_hat, S_hat
+
+
+
 
 def schedule(G, V_hat, S_hat):
     """
@@ -57,47 +97,44 @@ def schedule(G, V_hat, S_hat):
       - détermine les sommets dépendants (Δ-PFS)
     selon les coûts estimés basés sur les sketches.
     """
-    sources = []       # sommets a exécutés avec PFS
-    optimized = []     # couples (v, p) a exécutés avec optimized-PFS(v,p)
-    gamma=1.79
-    V_hat, S_hat = prep(G)
-    
-    def poids(u, v):
-        return G[u][v].get('weight', 1.0)
+    gamma = 1.79
+    S = {}                 
+    sources = []           # sommets à exécuter avec PFS
+    optimized = []         # couples (v, p) à exécuter avec Δ-PFS
 
-    # Fonction count() du sketch
+    def poids(u, v):
+     if G.has_edge(u, v):
+        return G[u][v].get('weight', 1.0)
+     elif G.has_edge(v, u):
+        return G[v][u].get('weight', 1.0)
+     else:
+        return 1.0
+
     def count(v):
         return V_hat[v].count() if hasattr(V_hat[v], "count") else len(V_hat[v])
-    
-    # Fonction d'estimation de la somme des distances promues
+
     def sigma_hat(v, p):
         c_v = count(v)
         c_p = count(p)
-        if c_v == 0: 
+        if c_v == 0:
             return 0
-        return (
-            poids(v, p) * c_p +
-            S_hat[p] -
-            (c_p / c_v) * S_hat[v]
-        )
+        return poids(v, p) * c_p + S_hat[p] - (c_p / c_v) * S_hat[v]
 
-    # Fonction d'estimation du nombre de sommets promus
     def promoted_vertices(v, p):
-        sigma = sigma_hat(v, p)
-        if sigma <= 0: 
+        sigma = max(sigma_hat(v, p), 1.0)
+        if sigma <= 0:
             return 0
-        c_p = count(p)
-        w = poids(v, p)
-        s_p = S_hat[p]
-        return 0.82 * (sigma ** 0.96) * (c_p ** 0.23) * ((w) ** -0.83) * (s_p ** 0.16)
+        c_p = max(count(p), 1.0)
+        w = max(poids(v, p), 1.0)
+        s_p = S_hat[p] if S_hat[p] > 1.0 else 1.0
+        return 0.82 * (sigma ** 0.96) * (c_p ** 0.23) / ((w ** 0.83) * (s_p ** 0.16))
 
-    # Boucle principale : pour chaque sommet, choisir PFS ou optimized-PFS
+    # --- Boucle principale ---
     for v in G.nodes():
-        t_v = count(v) * math.log(count(v) + 1)  # coût estimé du PFS
+        t_v = count(v) * math.log(count(v) + 1)
         best_parent = None
-        best_cost = float('inf')
+        best_cost = float("inf")
 
-        # Évaluer le coût optimized-PFS pour chaque voisin prédécesseur
         preds = G.predecessors(v) if G.is_directed() else G.neighbors(v)
         for p in preds:
             new_nodes = max(count(v) - count(p), 0)
@@ -110,18 +147,24 @@ def schedule(G, V_hat, S_hat):
                 best_cost = t_vp
                 best_parent = p
 
-        # Choisir entre PFS ou optimized-PFS
-        if t_v <= best_cost or best_parent is None:
+        if t_v < best_cost or best_parent is None:
             sources.append(v)
         else:
             optimized.append((v, best_parent))
-        S = {}
-        for (v, p) in optimized:
-         if p not in S:
+
+    # --- Construction du dictionnaire S après la boucle ---
+    for (v, p) in optimized:
+        if p not in S:
             S[p] = []
-         S[p].append(v)
+        S[p].append(v)
+
+    
+    for src in sources:
+        if src not in S:
+            S[src] = []
 
     return S
+
 def Start(S):
     all_nodes = set(S.keys()) | {child for children in S.values() for child in children}
     non_sources = {child for children in S.values() for child in children}
@@ -133,6 +176,7 @@ def prune(v,L,s,teta_A,S,delta_v,G):
     Inf={}
     Sup={}
     phi={}
+    Sup[v]=Inf[v]=len(L)
     m = len(G.nodes())
     if G.is_directed():
         path_to_v   = nx.ancestors(G, v)
@@ -147,9 +191,11 @@ def prune(v,L,s,teta_A,S,delta_v,G):
     heapq.heappush(Q, (0.0, v))
     while Q:
         (dist_u, u) = heapq.heappop(Q)
-        sprime=s-((len(L)-Inf[u]*delta_v)-(dist_u*Sup[u]))
-        cprime=((Sup[u]-1))**2/(m-1)*sprime
-        if cprime-teta_A<phi[u]:
+        Inf_u = Inf.get(u, len(L))
+        Sup_u = Sup.get(u, len(L))
+        sprime=s-(((len(L)-Inf_u)*delta_v)-(dist_u*Sup_u))
+        cprime=((Sup_u-1)**2)/((m-1)*sprime)
+        if cprime-teta_A<phi.get(u, float('inf')):
             phi[u]=cprime-teta_A
             if u in S:  
              for uprime in S[u]:  
@@ -170,84 +216,147 @@ def prune(v,L,s,teta_A,S,delta_v,G):
 
 
 def PFS(G, v):
-    L = {}               
-    L[v] = 0             
-    s = 0                
-    delta_v = 0          
-    Q = []               
-    heapq.heappush(Q, (0.0, v))
+    dist = {v: 0}
+    s = 0
+    delta_v = 0
+    visited = {v}
+    Q = deque([v])
+    adj = G._adj
 
     while Q:
-        (l, n) = heapq.heappop(Q) 
+        n = Q.popleft()
+        l = dist[n]
         s += l
-        delta_v = max(delta_v, l)
+        delta_v = l
+        for vprime in adj[n]:
+            if vprime not in visited:
+                visited.add(vprime)
+                dist[vprime] = l + 1
+                Q.append(vprime)
+    return dist, s, delta_v
 
-        # Pour chaque successeur direct de n
-        for vprime in G.neighbors(n):
-            w = G[n][vprime].get('weight', 1.0)  
-            lprime = l + w
+def optimized_PFS(G, v, p, L, s, delta_p):
+    """
+    Δ-PFS : version optimisée du PFS classique.
+    Réutilise les distances déjà calculées pour p afin de calculer celles de v.
+    """
+    # Distance du parent p et distance vers v
+    alpha_p = L[p]
+    w_pv = G[p][v].get('weight', 1.0)
 
-            if vprime not in L:
-                L[vprime] = lprime
-                heapq.heappush(Q, (lprime, vprime))
+    # ✅ on ajoute la distance, pas on la soustrait
+    alpha_v = alpha_p + w_pv
 
-            elif lprime < L[vprime]:  
-                L[vprime] = lprime
-                heapq.heappush(Q, (lprime, vprime))
+    # Copie locale des distances
+    L_v = dict(L)
+    s_v = s + len(L_v) * w_pv
+    delta_v = delta_p + w_pv
 
-    return L, s, delta_v
+    # journal des modifications (pour rollback)
+    log_level = {}
 
-def optimized_PFS(G,v, p,L,s,delta_p):
-    alpha_p=L[p]
-    w = G[p][v].get('weight', 1.0)
-    alpha_v=alpha_p-w
-    log_level=[]
-    Q=[]
-    heapq.heappush(log_level, (L[v], v))
-    heapq.heappush(Q, (alpha_v, v))
-    L[v]=alpha_v
-    s=s+(len(L)*w)
-    delta_v=delta_p+w
+    # file de priorité
+    Q = [(alpha_v, v)]
+    L_v[v] = alpha_v
+    log_level[v] = None
+
     while Q:
-        (l, n) = heapq.heappop(Q) 
-        if log_level[n] is None:
-            s=s+(l-alpha_v)
-            delta_v=max(delta_v,l-alpha_v)
-        else:
-            s=s-(log_level[n]-l)
-        for vprime in G.neighbors(n):
-            w = G[n][vprime].get('weight', 1.0)  
+        l, n = heapq.heappop(Q)
+
+        for vprime, data in G[n].items():
+            w = data.get('weight', 1.0)
             lprime = l + w
-            ll=log_level[vprime]
-            if ll is None | (lprime < ll):
-                L[vprime]=lprime
-                heapq.heappush(Q, (lprime, vprime))   
-                if vprime in log_level:
-                    heapq.heappush(log_level, (ll, vprime))
-    return L, s, delta_v , log_level
+            old = L_v.get(vprime)
+
+            if old is None or lprime < old:
+                # on note l'ancienne valeur pour rollback
+                log_level[vprime] = old
+                L_v[vprime] = lprime
+                heapq.heappush(Q, (lprime, vprime))
+
+                # mise à jour du score cumulé et de la distance max
+                s_v += (lprime - alpha_v)
+                delta_v = max(delta_v, lprime - alpha_v)
+
+    return L_v, s_v, delta_v, log_level
+
 
 def rollback(L, log_level):
-    for n, old_value in log_level.items():
-        if old_value is None:
-            if n in L:
-                del L[n]
+    """
+    Annule les modifications de distances dans L selon le journal.
+    (important pour la récursivité du Δ-PFS)
+    """
+    for n, old in log_level.items():
+        if old is None:
+            L.pop(n, None)
         else:
-            L[n] = old_value
+            L[n] = old
 
 def top_k_closeness(G, k):
-    A={}
+    A = {}
     V = len(G.nodes())
     V_hat, S_hat = prep(G)
-    S=schedule(G,V_hat,S_hat)
+    S = schedule(G, V_hat, S_hat)
+    list=Start(S)
+    print(f"le nombre de sommets sources est:{len(list)}")
+    dead = set()
     for v in Start(S):
-        (L,s,delta_p)=PFS(G,v)
-        process(G,v,L,s,A,S,k,V,delta_p)
-        return A
+        #start_optimized = time.perf_counter()
+        (L, s, delta_p) = PFS(G, v)
+        #end_optimized = time.perf_counter()
+        #print(f"PFS Time: {end_optimized - start_optimized:.4f} seconds")
+        process(G, v, L, s, A, S, k, V, delta_p, dead)  
+    return A
 
-def process(G,p,L,s,A,S,k,V,delta_p):
-    c_p=(len(L)-1)**2/(V-1)*s
-    A[p]=c_p
-    for v in S[p]:
-        (L,s,log_level)=optimized_PFS(G,v,p,L,s,delta_p)
-        process(G,p,L,s,A,S,k,V,delta_p)
-        rollback(L,log_level)
+
+def update_topk(A, p, c_p, k):
+    """
+    Maintient dynamiquement le top-k des plus fortes centralités.
+    Retourne le nouveau seuil θ_A (min des top-k).
+    """
+    # Si le nœud est déjà dans A → simple mise à jour
+    if p in A:
+        if c_p > A[p]:
+            A[p] = c_p
+        # seuil inchangé
+        return min(A.values()) if len(A) == k else 0
+
+    # Si pas encore k nœuds, on ajoute directement
+    if len(A) < k:
+        A[p] = c_p
+        return min(A.values()) if len(A) == k else 0
+
+    # Sinon, on remplace le plus petit si c_p est meilleur
+    min_node = min(A, key=A.get)
+    if c_p > A[min_node]:
+        del A[min_node]
+        A[p] = c_p
+
+    return min(A.values()) if len(A) == k else 0
+
+
+def process(G, p, L, s, A, S, k, V, delta_p, dead):
+    """
+    Étape de traitement récursif du sommet p :
+    - calcule la centralité de p
+    - met à jour le top-k
+    - propage à ses successeurs planifiés
+    """
+    if p in dead:
+        return
+
+    # --- 1. Calcul de la centralité
+    if s <= 0:
+        return  # sécurité
+    c_p = ((len(L) - 1) ** 2) / ((V - 1) * s)
+
+    # --- 2. Mise à jour du top-k et récupération du seuil θ_A
+    theta_A = update_topk(A, p, c_p, k)
+    prune(p, L, s, theta_A, S, delta_p, G)
+   
+
+    # --- 3. Propagation à chaque successeur planifié
+    for v in S.get(p, []):
+        L, s2, delta_v, log_level = optimized_PFS(G, v, p, L, s, delta_p)
+        process(G, v, L, s2, A, S, k, V, delta_v, dead)
+        rollback(L, log_level)  # ✅ rollback sur la même référence

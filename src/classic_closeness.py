@@ -1,35 +1,38 @@
 import networkx as nx
 from collections import deque
-
+import time
 def closeness_centrality_all_nodes(G):
     """
     Compute closeness centrality for all nodes in an unweighted, undirected graph.
     Based on Algorithm 1 from the course.
     """
     closeness = {}
-    
+    n = len(G)  # nombre total de sommets du graphe
+
     for v in G.nodes():
-        # Step 1: initialize distances
+        
+        # 1️⃣ Initialisation des distances
         dist = {u: float('inf') for u in G.nodes()}
         dist[v] = 0
-        
-        # Step 2: initialize queue and BFS
+
+        # 2️⃣ Parcours en largeur (BFS)
         Q = deque([v])
-        
         while Q:
             x = Q.popleft()
             for y in G.neighbors(x):
-                if dist[y] == float('inf'):  # not visited yet
+                if dist[y] == float('inf'):
                     dist[y] = dist[x] + 1
                     Q.append(y)
-        
-        # Step 3: compute sum of distances
-        S = sum(dist[u] for u in G.nodes() if u != v and dist[u] < float('inf'))
-        
-        # Step 4: compute closeness
-        if S > 0:
-            closeness[v] = 1 / S
+
+        # 3️⃣ Sommation des distances (uniquement les sommets atteignables)
+        reachable = [u for u in G.nodes() if dist[u] < float('inf')]
+        r_v = len(reachable)        # |R_v|
+        S = sum(dist[u] for u in reachable if u != v)
+
+        # 4️⃣ Calcul de la centralité normalisée
+        if S > 0 and r_v > 1:
+            closeness[v] = ((r_v - 1) ** 2) / ((n - 1) * S)
         else:
-            closeness[v] = 0.0  # isolated node
-        
+            closeness[v] = 0.0  # sommet isolé ou sans voisins atteignables
+        #print(f"nombre de sommets atteignables depuis {v}: {r_v} et somme des distances: {S}")
     return closeness

@@ -38,3 +38,7 @@ class Sketch:
      alpha = 0.7213 / (1 + 1.079 / self.m)
      E = alpha * self.m * self.m / Z
      return E
+    def clone(self):
+        copy = Sketch()
+        copy.registers = self.registers.copy()
+        return copy
