@@ -1,0 +1,7 @@
+city,nodes,edges,k,algo2_time_s
+"Rennes, France",4230,9040,3,41.528117
+"Nantes, France",6496,13993,3,99.03894
+"5th arrondissement, Paris, France",278,547,3,0.765639
+"7th arrondissement, Lyon, France",610,1240,3,1.97555
+"1st arrondissement, Marseille, France",230,426,3,0.594325
+"Lille, France",3257,6677,3,20.568381
