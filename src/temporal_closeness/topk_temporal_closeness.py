@@ -109,7 +109,6 @@ if __name__ == "__main__":
     print(f"=== Top-{k} Temporal Closeness dans l'intervalle {interval} ===")
     
     start_time = time.perf_counter()
-   
-    topk_temporal_closeness(G, k=k, interval=interval)
+    res = topk_temporal_closeness(G, k=k, interval=interval)
     end_time = time.perf_counter()
     print(f"\n⏱️ Temps total d'exécution : {end_time - start_time:.6f} secondes")
