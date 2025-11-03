@@ -297,8 +297,6 @@ def top_k_closeness(G, k):
     V = len(G.nodes())
     V_hat, S_hat = prep(G)
     S = schedule(G, V_hat, S_hat)
-    list=Start(S)
-    print(f"le nombre de sommets sources est:{len(list)}")
     dead = set()
     for v in Start(S):
         #start_optimized = time.perf_counter()
