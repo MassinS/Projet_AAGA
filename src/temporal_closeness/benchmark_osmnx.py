@@ -54,7 +54,7 @@ def get_largest_strongly_connected_component(G):
 # ------------------------------------------------------------
 # Visualisation des Top-k sur le graphe routier
 # ------------------------------------------------------------
-def plot_topk_on_city(G_static, topk_nodes, city, save_dir="results"):
+def plot_topk_on_city(G_static, topk_nodes, city, save_dir="graph/temporel"):
     """
     Affiche le graphe routier d'une ville avec les Top-k sommets mis en évidence.
     - G_static : graphe OSMnx (statique)

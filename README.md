@@ -54,7 +54,8 @@ Projet_AAGA/
 │
 ├── graph/
 │   ├── classic/
-│   └── efficient/
+│   ├── efficient/
+│   └── temporel
 │
 ├── resultat_comparaison/
 │   ├── resume_no_oriented.csv
@@ -142,7 +143,7 @@ En plus des comparaisons globales, le projet comprend **trois scripts autonomes*
   * le nombre de sommets et d’arêtes,
   * le paramètre `k`,
   * le temps d’exécution de chaque algorithme.
-* Sauvegarde les graphiques dans `temporal_closeness/results/`.
+* Sauvegarde les graphiques dans `graph/temporel`.
 
 ---
 

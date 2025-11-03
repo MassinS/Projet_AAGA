@@ -17611,7 +17611,7 @@
     <edge source="27509321" target="252119762" id="0">
       <data key="d11">[196966208, 281337363, 997988747]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">['30', '50']</data>
       <data key="d15">Avenue Albert 1er</data>
       <data key="d21">M 905</data>
@@ -17781,9 +17781,9 @@
     <edge source="27511562" target="5250302357" id="0">
       <data key="d11">[778567608, 23237744, 524769828]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
-      <data key="d15">['Place Gaston Gérard', 'Boulevard Trimolet']</data>
+      <data key="d15">['Boulevard Trimolet', 'Place Gaston Gérard']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">326.86313322904306</data>
@@ -17903,7 +17903,7 @@
       <data key="d11">[281813802, 4571252, 288629036, 295688415]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Jules Ferry', 'Quai Navier']</data>
+      <data key="d15">['Quai Navier', 'Rue Jules Ferry']</data>
       <data key="d24">6</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
@@ -18894,7 +18894,7 @@
     <edge source="27513419" target="5255463950" id="0">
       <data key="d11">[1317112875, 7834533, 23575631]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">['Boulevard de Champagne', 'Avenue Raymond Poincaré']</data>
       <data key="d16">False</data>
@@ -20208,7 +20208,7 @@
     <edge source="28806136" target="2063660642" id="0">
       <data key="d11">[311426586, 1191165499]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Boulevard Paul Doumer</data>
       <data key="d16">True</data>
@@ -20403,7 +20403,7 @@
     <edge source="28806162" target="28806163" id="0">
       <data key="d11">[687601472, 687601473]</data>
       <data key="d12">trunk_link</data>
-      <data key="d20">['1', '2']</data>
+      <data key="d20">['2', '1']</data>
       <data key="d14">70</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
@@ -22227,7 +22227,7 @@
       <data key="d11">[23149651, 23149652]</data>
       <data key="d12">residential</data>
       <data key="d14">50</data>
-      <data key="d15">['Rue Pierre Semard', 'Rue Robert Estienne']</data>
+      <data key="d15">['Rue Robert Estienne', 'Rue Pierre Semard']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">553.310940690243</data>
@@ -22491,7 +22491,7 @@
       <data key="d11">[5733738, 501389125]</data>
       <data key="d12">primary</data>
       <data key="d14">50</data>
-      <data key="d15">['Avenue Jean Jaurès', 'Avenue Roland Carraz']</data>
+      <data key="d15">['Avenue Roland Carraz', 'Avenue Jean Jaurès']</data>
       <data key="d16">True</data>
       <data key="d21">M 974</data>
       <data key="d17">False</data>
@@ -22501,7 +22501,7 @@
     <edge source="31388816" target="3136400532" id="0">
       <data key="d11">[533585532, 533585525, 308349567]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Boulevard des Diables Bleus</data>
       <data key="d16">True</data>
@@ -22606,7 +22606,7 @@
       <data key="d14">50</data>
       <data key="d15">Avenue Jean Jaurès</data>
       <data key="d16">True</data>
-      <data key="d21">['M 974', 'Hecladus']</data>
+      <data key="d21">['Hecladus', 'M 974']</data>
       <data key="d17">False</data>
       <data key="d18">114.92175596710288</data>
       <data key="d19">LINESTRING (5.0260435 47.3097373, 5.0263471 47.310273, 5.0263692 47.3102969, 5.0266072 47.310697)</data>
@@ -22645,9 +22645,9 @@
     <edge source="31402031" target="2072559575" id="0">
       <data key="d11">[712684790, 712684789, 4873534, 23174662]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['1', '2']</data>
+      <data key="d20">['2', '1']</data>
       <data key="d14">['30', '50']</data>
-      <data key="d15">['Place du Premier Mai', 'Avenue Jean Jaurès']</data>
+      <data key="d15">['Avenue Jean Jaurès', 'Place du Premier Mai']</data>
       <data key="d16">True</data>
       <data key="d21">M 974</data>
       <data key="d17">False</data>
@@ -22680,7 +22680,7 @@
       <data key="d12">primary</data>
       <data key="d20">2</data>
       <data key="d14">50</data>
-      <data key="d15">['Boulevard John Kennedy', 'Boulevard Maillard']</data>
+      <data key="d15">['Boulevard Maillard', 'Boulevard John Kennedy']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">113.69013130159767</data>
@@ -23615,7 +23615,7 @@
     <edge source="31560965" target="5225321966" id="0">
       <data key="d11">[540060609, 23302789, 419891527, 256726167, 997980315]</data>
       <data key="d12">primary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Boulevard Chanoine Kir</data>
       <data key="d16">True</data>
@@ -24233,7 +24233,7 @@
       <data key="d12">secondary</data>
       <data key="d20">2</data>
       <data key="d14">50</data>
-      <data key="d15">["Avenue de l'Université", 'Rue Sully']</data>
+      <data key="d15">['Rue Sully', "Avenue de l'Université"]</data>
       <data key="d16">True</data>
       <data key="d21">M 107</data>
       <data key="d17">False</data>
@@ -24455,7 +24455,7 @@
       <data key="d11">[23149586, 4935037]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue du Commandant Abrioux', 'Rue Philippe Guignard']</data>
+      <data key="d15">['Rue Philippe Guignard', 'Rue du Commandant Abrioux']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">537.8963742837649</data>
@@ -24476,7 +24476,7 @@
       <data key="d11">[23149586, 4935037]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue du Commandant Abrioux', 'Rue Philippe Guignard']</data>
+      <data key="d15">['Rue Philippe Guignard', 'Rue du Commandant Abrioux']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">537.8963742837647</data>
@@ -24553,7 +24553,7 @@
     <edge source="32489827" target="250062194" id="0">
       <data key="d11">[132237138, 288518780]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Allée Desperiers', 'Rue Paul Lebel']</data>
+      <data key="d15">['Rue Paul Lebel', 'Allée Desperiers']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">204.5572869348525</data>
@@ -25240,7 +25240,7 @@
     <edge source="32635941" target="1468087480" id="0">
       <data key="d11">[1332588950, 266334102]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Rue de Mirande</data>
       <data key="d16">False</data>
@@ -25703,7 +25703,7 @@
       <data key="d11">[1321843588, 240572477, 23361534]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Bossuet', 'Place Bossuet']</data>
+      <data key="d15">['Place Bossuet', 'Rue Bossuet']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">71.88050329122814</data>
@@ -25713,7 +25713,7 @@
       <data key="d11">[23281072, 280260219]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Michelet', 'Place Bossuet']</data>
+      <data key="d15">['Place Bossuet', 'Rue Michelet']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">52.05212581817433</data>
@@ -26213,7 +26213,7 @@
       <data key="d11">[4950776, 605303598, 605303599]</data>
       <data key="d12">motorway_link</data>
       <data key="d20">1</data>
-      <data key="d14">['70', '50', '90']</data>
+      <data key="d14">['90', '70', '50']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">319.8405087534969</data>
@@ -26374,7 +26374,7 @@
     <edge source="32661831" target="251970379" id="0">
       <data key="d11">[23280376, 259447029, 259447030, 23280375]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Chemin Jacques de Baerze', 'Rue Blairet']</data>
+      <data key="d15">['Rue Blairet', 'Chemin Jacques de Baerze']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">294.94461914915354</data>
@@ -26475,7 +26475,7 @@
     <edge source="32661844" target="58556836" id="0">
       <data key="d11">[997987064, 23866613]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['5', '3']</data>
+      <data key="d20">['3', '5']</data>
       <data key="d14">50</data>
       <data key="d15">Avenue Albert 1er</data>
       <data key="d21">M 905</data>
@@ -26973,7 +26973,7 @@
     <edge source="32661920" target="250515513" id="0">
       <data key="d11">[23191993, 4952380]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue Docteur Calmette', 'Chemin de la Croix des Valendons']</data>
+      <data key="d15">['Chemin de la Croix des Valendons', 'Rue Docteur Calmette']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">649.2241576498428</data>
@@ -28884,7 +28884,7 @@
     <edge source="58556836" target="4198823922" id="0">
       <data key="d11">[1394899968, 279523665, 23866614, 997980314, 480203455]</data>
       <data key="d12">primary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Avenue Albert 1er</data>
       <data key="d16">True</data>
@@ -28895,7 +28895,7 @@
     <edge source="58556836" target="32661844" id="0">
       <data key="d11">[997987064, 23866613]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['5', '3']</data>
+      <data key="d20">['3', '5']</data>
       <data key="d14">50</data>
       <data key="d15">Avenue Albert 1er</data>
       <data key="d21">M 905</data>
@@ -29251,7 +29251,7 @@
       <data key="d11">[999859477, 24272358]</data>
       <data key="d12">residential</data>
       <data key="d14">50</data>
-      <data key="d15">['Boulevard Rembrandt', 'Rue Henri Matisse']</data>
+      <data key="d15">['Rue Henri Matisse', 'Boulevard Rembrandt']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">119.09400404279575</data>
@@ -29284,7 +29284,7 @@
       <data key="d12">residential</data>
       <data key="d20">2</data>
       <data key="d14">50</data>
-      <data key="d15">['Boulevard Rembrandt', 'Rue Henri Matisse']</data>
+      <data key="d15">['Rue Henri Matisse', 'Boulevard Rembrandt']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">119.09400404279576</data>
@@ -29674,7 +29674,7 @@
       <data key="d11">[24469379, 24469262]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Alphonse Daudet', 'Rue Alain Fournier']</data>
+      <data key="d15">['Rue Alain Fournier', 'Rue Alphonse Daudet']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">302.6661264720405</data>
@@ -29794,7 +29794,7 @@
       <data key="d11">[24469379, 24469380]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Alain Fournier', 'Rue Gustave Flaubert']</data>
+      <data key="d15">['Rue Gustave Flaubert', 'Rue Alain Fournier']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">309.9348800285624</data>
@@ -29823,7 +29823,7 @@
       <data key="d11">[24469379, 24469262]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Alphonse Daudet', 'Rue Alain Fournier']</data>
+      <data key="d15">['Rue Alain Fournier', 'Rue Alphonse Daudet']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">302.6661264720405</data>
@@ -30308,7 +30308,7 @@
     <edge source="250062194" target="32489827" id="0">
       <data key="d11">[132237138, 288518780]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Allée Desperiers', 'Rue Paul Lebel']</data>
+      <data key="d15">['Rue Paul Lebel', 'Allée Desperiers']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">204.55728693485247</data>
@@ -30531,7 +30531,7 @@
       <data key="d11">[23149161, 23149162]</data>
       <data key="d12">residential</data>
       <data key="d14">50</data>
-      <data key="d15">['Rue Maréchal Koening', 'Rue Jean Begat']</data>
+      <data key="d15">['Rue Jean Begat', 'Rue Maréchal Koening']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">203.2398807506986</data>
@@ -30634,7 +30634,7 @@
       <data key="d11">[23149651, 23149652]</data>
       <data key="d12">residential</data>
       <data key="d14">50</data>
-      <data key="d15">['Rue Pierre Semard', 'Rue Robert Estienne']</data>
+      <data key="d15">['Rue Robert Estienne', 'Rue Pierre Semard']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">553.3109406902431</data>
@@ -34487,7 +34487,7 @@
     <edge source="251008327" target="538510" id="0">
       <data key="d11">[1230924630, 542468957, 266334078]</data>
       <data key="d12">primary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Avenue de Dallas</data>
       <data key="d16">True</data>
@@ -34610,7 +34610,7 @@
     <edge source="251009235" target="4625385209" id="1">
       <data key="d11">[23206617, 467977711, 1019253025]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue Étienne et Raymonde Mauchaussé', 'Allée Charles Trenet', 'Rue de Dixmude']</data>
+      <data key="d15">['Allée Charles Trenet', 'Rue Étienne et Raymonde Mauchaussé', 'Rue de Dixmude']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">319.5968151598603</data>
@@ -34638,7 +34638,7 @@
     <edge source="251020735" target="3258266602" id="0">
       <data key="d11">[23207036, 23207037]</data>
       <data key="d12">['residential', 'unclassified']</data>
-      <data key="d14">['30', '15']</data>
+      <data key="d14">['15', '30']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">351.57486989037955</data>
@@ -35887,7 +35887,7 @@
     <edge source="251695374" target="251700292" id="0">
       <data key="d11">[23258045, 23258350]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue Isabelle de Portugal', "Rue de l'Est"]</data>
+      <data key="d15">["Rue de l'Est", 'Rue Isabelle de Portugal']</data>
       <data key="d24">6.7</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
@@ -36022,7 +36022,7 @@
     <edge source="251700292" target="251695374" id="0">
       <data key="d11">[23258045, 23258350]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue Isabelle de Portugal', "Rue de l'Est"]</data>
+      <data key="d15">["Rue de l'Est", 'Rue Isabelle de Portugal']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">88.68740091820567</data>
@@ -36265,7 +36265,7 @@
       <data key="d11">[23261584, 4572837]</data>
       <data key="d12">residential</data>
       <data key="d20">2</data>
-      <data key="d15">['Avenue Maréchal Lyautey', 'Rue Adolphe Joanne']</data>
+      <data key="d15">['Rue Adolphe Joanne', 'Avenue Maréchal Lyautey']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">187.18912173713528</data>
@@ -36296,7 +36296,7 @@
       <data key="d11">[23261584, 4572837]</data>
       <data key="d12">residential</data>
       <data key="d14">50</data>
-      <data key="d15">['Avenue Maréchal Lyautey', 'Rue Adolphe Joanne']</data>
+      <data key="d15">['Rue Adolphe Joanne', 'Avenue Maréchal Lyautey']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">187.18912173713528</data>
@@ -37138,7 +37138,7 @@
     <edge source="251970379" target="32661831" id="0">
       <data key="d11">[23280376, 259447029, 259447030, 23280375]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Chemin Jacques de Baerze', 'Rue Blairet']</data>
+      <data key="d15">['Rue Blairet', 'Chemin Jacques de Baerze']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">294.9446191491535</data>
@@ -37169,7 +37169,7 @@
       <data key="d11">[129780130, 23281834]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Place Saint-Bénigne', 'Rue Mariotte']</data>
+      <data key="d15">['Rue Mariotte', 'Place Saint-Bénigne']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">84.46128004001727</data>
@@ -37439,7 +37439,7 @@
     <edge source="251993911" target="12433756816" id="0">
       <data key="d11">[23575717, 4571246]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue Guillaume Tell', 'Rue Docteur Albert Rémy']</data>
+      <data key="d15">['Rue Docteur Albert Rémy', 'Rue Guillaume Tell']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">134.17101648853154</data>
@@ -37514,7 +37514,7 @@
     <edge source="252119762" target="27509321" id="0">
       <data key="d11">[281337363, 997988747, 196966208]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">['30', '50']</data>
       <data key="d15">Avenue Albert 1er</data>
       <data key="d21">M 905</data>
@@ -37768,7 +37768,7 @@
     </edge>
     <edge source="252124527" target="252124531" id="0">
       <data key="d11">[184899408, 184899409, 23292014]</data>
-      <data key="d12">['living_street', 'residential']</data>
+      <data key="d12">['residential', 'living_street']</data>
       <data key="d15">Rue Louis Jouvet</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
@@ -38554,7 +38554,7 @@
       <data key="d11">[164734294, 23330326]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Victor Dumay', 'Rue Berbisey']</data>
+      <data key="d15">['Rue Berbisey', 'Rue Victor Dumay']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">131.692960739049</data>
@@ -38584,7 +38584,7 @@
       <data key="d11">[23330320, 23330505]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue des Bons Enfants', 'Rue Philippe Pot']</data>
+      <data key="d15">['Rue Philippe Pot', 'Rue des Bons Enfants']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">96.02009983737557</data>
@@ -39480,7 +39480,7 @@
       <data key="d11">[281346648, 922761358]</data>
       <data key="d12">tertiary</data>
       <data key="d14">30</data>
-      <data key="d15">['Boulevard de Brosses', 'Place Saint-Bernard']</data>
+      <data key="d15">['Place Saint-Bernard', 'Boulevard de Brosses']</data>
       <data key="d16">True</data>
       <data key="d21">M 905</data>
       <data key="d17">False</data>
@@ -39555,7 +39555,7 @@
       <data key="d11">[23373186, 80841932, 23373199]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Claude Ramey', 'Rue Odebert', 'Rue Quentin']</data>
+      <data key="d15">['Rue Quentin', 'Rue Odebert', 'Rue Claude Ramey']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">274.92643882214315</data>
@@ -39595,7 +39595,7 @@
       <data key="d11">[23373202, 524909550]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Bannelier', 'Place de la Banque']</data>
+      <data key="d15">['Place de la Banque', 'Rue Bannelier']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">70.48529804687772</data>
@@ -39605,7 +39605,7 @@
       <data key="d11">[524909550, 23373191]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue de Soissons', 'Place de la Banque']</data>
+      <data key="d15">['Place de la Banque', 'Rue de Soissons']</data>
       <data key="d16">False</data>
       <data key="d17">[False, True]</data>
       <data key="d18">108.55185667728661</data>
@@ -39615,7 +39615,7 @@
       <data key="d11">[193678848, 911250394]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue de Suzon', 'Place de la Banque']</data>
+      <data key="d15">['Place de la Banque', 'Rue de Suzon']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">137.39556544210353</data>
@@ -39839,7 +39839,7 @@
     <edge source="253258320" target="1744631503" id="0">
       <data key="d11">[1332588952, 1332588953, 1383812606]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Rue de Mirande</data>
       <data key="d21">M 107</data>
@@ -40595,7 +40595,7 @@
       <data key="d11">[414210137, 1272286106, 23432222]</data>
       <data key="d12">residential</data>
       <data key="d20">2</data>
-      <data key="d15">['Rue des Plantes Mères', 'Place de la Darse']</data>
+      <data key="d15">['Place de la Darse', 'Rue des Plantes Mères']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">251.71152009728104</data>
@@ -40921,7 +40921,7 @@
     <edge source="253809143" target="2038309782" id="0">
       <data key="d11">[126060963, 24249461]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d15">Place Général Estienne</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
@@ -41109,7 +41109,7 @@
     <edge source="253972501" target="254116149" id="0">
       <data key="d11">[1393890314, 1291906534, 1235851710, 1235851383]</data>
       <data key="d12">['residential', 'living_street']</data>
-      <data key="d14">['20', '30']</data>
+      <data key="d14">['30', '20']</data>
       <data key="d15">Rue d'Assas</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
@@ -41808,7 +41808,7 @@
     <edge source="254108774" target="12382082849" id="0">
       <data key="d11">[23757752, 288509357]</data>
       <data key="d12">residential</data>
-      <data key="d15">["Square du Creux d'Enfer", 'Rue Charles Royer']</data>
+      <data key="d15">['Rue Charles Royer', "Square du Creux d'Enfer"]</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">147.10025341914164</data>
@@ -45404,7 +45404,7 @@
       <data key="d11">[193678850, 922761359]</data>
       <data key="d12">tertiary</data>
       <data key="d14">30</data>
-      <data key="d15">['Boulevard de la Trémouille', 'Place Saint-Bernard']</data>
+      <data key="d15">['Place Saint-Bernard', 'Boulevard de la Trémouille']</data>
       <data key="d16">True</data>
       <data key="d21">M 905</data>
       <data key="d17">False</data>
@@ -45457,7 +45457,7 @@
       <data key="d11">[257763786, 196980357]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Place Charles François Dupuis', 'Rue du Colonel Victor Marchand']</data>
+      <data key="d15">['Rue du Colonel Victor Marchand', 'Place Charles François Dupuis']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">195.16024676015473</data>
@@ -45954,7 +45954,7 @@
       <data key="d11">[291115696, 24250394]</data>
       <data key="d12">residential</data>
       <data key="d14">50</data>
-      <data key="d15">['Rue Georges Lavier', 'Rue Joseph Garnier']</data>
+      <data key="d15">['Rue Joseph Garnier', 'Rue Georges Lavier']</data>
       <data key="d16">False</data>
       <data key="d17">[False, True]</data>
       <data key="d18">432.5377029298091</data>
@@ -46358,7 +46358,7 @@
       <data key="d22">yes</data>
       <data key="d12">tertiary</data>
       <data key="d20">2</data>
-      <data key="d15">['Rue de Malines', 'Boulevard Winston Churchill']</data>
+      <data key="d15">['Boulevard Winston Churchill', 'Rue de Malines']</data>
       <data key="d16">False</data>
       <data key="d17">[False, True]</data>
       <data key="d18">373.9438473273563</data>
@@ -51642,7 +51642,7 @@
     <edge source="260139642" target="8068821069" id="0">
       <data key="d11">[23516723, 1077236859]</data>
       <data key="d12">tertiary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d15">Rue Auguste Fremiet</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
@@ -51698,7 +51698,7 @@
       <data key="d11">[291115696, 24250394]</data>
       <data key="d12">residential</data>
       <data key="d14">50</data>
-      <data key="d15">['Rue Georges Lavier', 'Rue Joseph Garnier']</data>
+      <data key="d15">['Rue Joseph Garnier', 'Rue Georges Lavier']</data>
       <data key="d16">False</data>
       <data key="d17">[False, True]</data>
       <data key="d18">432.5377029298091</data>
@@ -51726,7 +51726,7 @@
     <edge source="260139647" target="1398483190" id="0">
       <data key="d11">[1202748176, 281785427, 1202748087]</data>
       <data key="d12">tertiary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d15">Rue Auguste Fremiet</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
@@ -51757,7 +51757,7 @@
     <edge source="260140122" target="507971629" id="0">
       <data key="d11">[247652770, 1199719401, 1199719402]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Rue Devosge</data>
       <data key="d16">False</data>
@@ -52917,7 +52917,7 @@
     <edge source="260807697" target="260807698" id="0">
       <data key="d11">[24048904, 24048903]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue Jean Joseph Debillemont', 'Rue Louis Ganne']</data>
+      <data key="d15">['Rue Louis Ganne', 'Rue Jean Joseph Debillemont']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">171.09626659620005</data>
@@ -52962,7 +52962,7 @@
     <edge source="260807698" target="260807697" id="0">
       <data key="d11">[24048904, 24048903]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue Jean Joseph Debillemont', 'Rue Louis Ganne']</data>
+      <data key="d15">['Rue Louis Ganne', 'Rue Jean Joseph Debillemont']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">171.09626659620005</data>
@@ -53355,7 +53355,7 @@
       <data key="d11">[1126145492, 1126145493, 24154518]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue des Rosiers', 'Rue de Lorraine']</data>
+      <data key="d15">['Rue de Lorraine', 'Rue des Rosiers']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">150.57510862100546</data>
@@ -58833,7 +58833,7 @@
       <data key="d11">[24291411, 24291412, 24291366]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">["Rue du 27ème Régiment d'Infanterie", 'Rue Bernard Chevrier', 'Rue Louise Michel']</data>
+      <data key="d15">["Rue du 27ème Régiment d'Infanterie", 'Rue Louise Michel', 'Rue Bernard Chevrier']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">351.79939470066364</data>
@@ -58872,7 +58872,7 @@
       <data key="d11">[24291411, 24291412, 24291366]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">["Rue du 27ème Régiment d'Infanterie", 'Rue Bernard Chevrier', 'Rue Louise Michel']</data>
+      <data key="d15">['Rue Louise Michel', "Rue du 27ème Régiment d'Infanterie", 'Rue Bernard Chevrier']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">351.79939470066364</data>
@@ -60788,7 +60788,7 @@
     <edge source="265448146" target="265448153" id="0">
       <data key="d11">[24424419, 481832004, 481832005, 24424565]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue des Layottes', 'Rue des Hauts de la Combe']</data>
+      <data key="d15">['Rue des Hauts de la Combe', 'Rue des Layottes']</data>
       <data key="d16">False</data>
       <data key="d17">[False, True]</data>
       <data key="d18">671.0645517949761</data>
@@ -60824,7 +60824,7 @@
     <edge source="265448153" target="265448146" id="1">
       <data key="d11">[481832005, 24424419, 481832004, 24424565]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue des Layottes', 'Rue des Hauts de la Combe']</data>
+      <data key="d15">['Rue des Hauts de la Combe', 'Rue des Layottes']</data>
       <data key="d16">False</data>
       <data key="d17">[False, True]</data>
       <data key="d18">671.0645517949761</data>
@@ -63146,7 +63146,7 @@
       <data key="d12">secondary</data>
       <data key="d20">2</data>
       <data key="d14">50</data>
-      <data key="d15">['Route de Corcelles', 'Rue de Corcelles']</data>
+      <data key="d15">['Rue de Corcelles', 'Route de Corcelles']</data>
       <data key="d21">M 108G</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
@@ -64281,7 +64281,7 @@
     <edge source="507739202" target="251977187" id="0">
       <data key="d11">[23281834, 129780130]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Place Saint-Bénigne', 'Rue Mariotte']</data>
+      <data key="d15">['Rue Mariotte', 'Place Saint-Bénigne']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">84.46128004001726</data>
@@ -64302,7 +64302,7 @@
     <edge source="507971629" target="260140122" id="0">
       <data key="d11">[1199719401, 247652770, 1199719402]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Rue Devosge</data>
       <data key="d16">False</data>
@@ -65168,7 +65168,7 @@
     </edge>
     <edge source="729927274" target="31415111" id="0">
       <data key="d11">[203994202, 4209342]</data>
-      <data key="d12">['primary', 'motorway']</data>
+      <data key="d12">['motorway', 'primary']</data>
       <data key="d20">2</data>
       <data key="d14">90</data>
       <data key="d16">True</data>
@@ -65956,7 +65956,7 @@
     <edge source="1154838499" target="42400792" id="0">
       <data key="d11">[4863651, 533585535]</data>
       <data key="d12">primary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Boulevard Maillard</data>
       <data key="d16">True</data>
@@ -66827,7 +66827,7 @@
     <edge source="1367569358" target="27511616" id="0">
       <data key="d11">[4571252, 281813802, 288629036, 295688415]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue Jules Ferry', 'Quai Navier']</data>
+      <data key="d15">['Quai Navier', 'Rue Jules Ferry']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">163.3289747408527</data>
@@ -67041,7 +67041,7 @@
     <edge source="1398483190" target="260139647" id="0">
       <data key="d11">[1202748176, 281785427, 1202748087]</data>
       <data key="d12">tertiary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d15">Rue Auguste Fremiet</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
@@ -67194,7 +67194,7 @@
     <edge source="1415912378" target="253809144" id="0">
       <data key="d11">[284243060, 294012237, 24159581, 1190579910]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['1', '2', '3']</data>
+      <data key="d20">['3', '2', '1']</data>
       <data key="d15">Rue Sambin</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
@@ -67403,7 +67403,7 @@
       <data key="d11">[23149161, 23149162]</data>
       <data key="d12">residential</data>
       <data key="d14">50</data>
-      <data key="d15">['Rue Maréchal Koening', 'Rue Jean Begat']</data>
+      <data key="d15">['Rue Jean Begat', 'Rue Maréchal Koening']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">203.23988075069863</data>
@@ -67459,7 +67459,7 @@
     <edge source="1468087452" target="1468087480" id="0">
       <data key="d11">[266334084, 1384573765]</data>
       <data key="d12">tertiary</data>
-      <data key="d20">['1', '2']</data>
+      <data key="d20">['2', '1']</data>
       <data key="d14">50</data>
       <data key="d15">Boulevard Voltaire</data>
       <data key="d16">True</data>
@@ -67585,7 +67585,7 @@
     <edge source="1468087480" target="32635941" id="0">
       <data key="d11">[266334102, 1332588950]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Rue de Mirande</data>
       <data key="d16">False</data>
@@ -67839,7 +67839,7 @@
       <data key="d11">[614275017, 687601453]</data>
       <data key="d12">primary</data>
       <data key="d20">2</data>
-      <data key="d14">['50', '90']</data>
+      <data key="d14">['90', '50']</data>
       <data key="d15">Rue de Neuilly</data>
       <data key="d16">True</data>
       <data key="d21">M 905</data>
@@ -68727,7 +68727,7 @@
       <data key="d12">primary</data>
       <data key="d20">2</data>
       <data key="d14">50</data>
-      <data key="d15">['Boulevard John Kennedy', 'Boulevard Maillard']</data>
+      <data key="d15">['Boulevard Maillard', 'Boulevard John Kennedy']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">199.4668040156258</data>
@@ -68759,7 +68759,7 @@
     <edge source="1744631503" target="253258320" id="0">
       <data key="d11">[1332588952, 1332588953, 1383812606]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Rue de Mirande</data>
       <data key="d21">M 107</data>
@@ -68847,7 +68847,7 @@
     <edge source="1765249796" target="263027696" id="0">
       <data key="d11">[24295544, 1199699649, 23635308, 23206550]</data>
       <data key="d12">primary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">Avenue Champollion</data>
       <data key="d16">True</data>
@@ -68936,7 +68936,7 @@
     <edge source="1769240397" target="1469622846" id="0">
       <data key="d11">[621807458, 621807459, 613309291, 621807435, 1332578046, 621807455]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">['30', '50']</data>
       <data key="d15">Rue Sully</data>
       <data key="d16">True</data>
@@ -69557,7 +69557,7 @@
       <data key="d11">[363998187, 176505173]</data>
       <data key="d12">['residential', 'unclassified']</data>
       <data key="d14">['30', '50']</data>
-      <data key="d15">['Rue Julie-Victoire Daubié', 'Place Galilée']</data>
+      <data key="d15">['Place Galilée', 'Rue Julie-Victoire Daubié']</data>
       <data key="d16">False</data>
       <data key="d17">[False, True]</data>
       <data key="d18">20.037200253130127</data>
@@ -70479,7 +70479,7 @@
     <edge source="2038309782" target="253809143" id="0">
       <data key="d11">[126060963, 24249461]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d15">Place Général Estienne</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
@@ -70709,7 +70709,7 @@
       <data key="d11">[256726168, 1198450537, 1187796691]</data>
       <data key="d12">secondary</data>
       <data key="d20">3</data>
-      <data key="d15">['Boulevard de Sévigné', 'Place Darcy']</data>
+      <data key="d15">['Place Darcy', 'Boulevard de Sévigné']</data>
       <data key="d16">False</data>
       <data key="d21">M 905</data>
       <data key="d17">[False, True]</data>
@@ -71071,7 +71071,7 @@
     <edge source="2049455419" target="4628139208" id="0">
       <data key="d11">[4868315, 578615886, 578615887]</data>
       <data key="d12">trunk_link</data>
-      <data key="d20">['1', '2']</data>
+      <data key="d20">['2', '1']</data>
       <data key="d14">50</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
@@ -72769,7 +72769,7 @@
     <edge source="2132564004" target="5874079124" id="0">
       <data key="d11">[621807456, 621807457, 621807460, 266334097, 23265978]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['1', '2']</data>
+      <data key="d20">['2', '1']</data>
       <data key="d14">['30', '50']</data>
       <data key="d15">Rue Sully</data>
       <data key="d16">True</data>
@@ -74753,7 +74753,7 @@
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">133.65869594910893</data>
-      <data key="d20">['1', '2']</data>
+      <data key="d20">['2', '1']</data>
       <data key="d19">LINESTRING (5.0669296 47.3222884, 5.0667678 47.322301, 5.0664966 47.3223356, 5.0664225 47.3223342, 5.0660369 47.3223268, 5.0658017 47.3223207, 5.0654278 47.3223095, 5.0653357 47.3223036, 5.0652929 47.3223009, 5.0651641 47.3222926)</data>
     </edge>
     <edge source="2819569210" target="27512111" id="0">
@@ -75023,7 +75023,7 @@
       <data key="d12">secondary</data>
       <data key="d20">2</data>
       <data key="d14">50</data>
-      <data key="d15">["Avenue de l'Université", 'Rue Sully']</data>
+      <data key="d15">['Rue Sully', "Avenue de l'Université"]</data>
       <data key="d16">True</data>
       <data key="d21">M 107</data>
       <data key="d17">False</data>
@@ -75720,7 +75720,7 @@
       <data key="d11">[4865354, 4868311]</data>
       <data key="d12">tertiary</data>
       <data key="d20">2</data>
-      <data key="d15">['Rue de Malines', 'Boulevard Winston Churchill']</data>
+      <data key="d15">['Boulevard Winston Churchill', 'Rue de Malines']</data>
       <data key="d16">False</data>
       <data key="d17">[False, True]</data>
       <data key="d18">373.9438473273563</data>
@@ -75791,7 +75791,7 @@
     <edge source="3136400531" target="42400780" id="0">
       <data key="d11">[308349571, 533581110]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['1', '3']</data>
+      <data key="d20">['3', '1']</data>
       <data key="d14">50</data>
       <data key="d15">Boulevard des Diables Bleus</data>
       <data key="d16">True</data>
@@ -75913,7 +75913,7 @@
       <data key="d11">[266334089, 626240081, 311426582, 1417305303, 1191165501]</data>
       <data key="d12">secondary</data>
       <data key="d14">50</data>
-      <data key="d15">['Boulevard Paul Doumer', 'Place Gaston Gérard']</data>
+      <data key="d15">['Place Gaston Gérard', 'Boulevard Paul Doumer']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">334.8709577997148</data>
@@ -75992,7 +75992,7 @@
     <edge source="3258266602" target="251020735" id="0">
       <data key="d11">[23207036, 23207037]</data>
       <data key="d12">['residential', 'unclassified']</data>
-      <data key="d14">['30', '15']</data>
+      <data key="d14">['15', '30']</data>
       <data key="d15">Rue Marius Chanteur</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
@@ -76223,7 +76223,7 @@
       <data key="d11">[414210137, 1272286106, 23432222]</data>
       <data key="d12">residential</data>
       <data key="d20">2</data>
-      <data key="d15">['Rue des Plantes Mères', 'Place de la Darse']</data>
+      <data key="d15">['Place de la Darse', 'Rue des Plantes Mères']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">251.71152009728107</data>
@@ -76523,7 +76523,7 @@
     <edge source="4028582133" target="4104103171" id="0">
       <data key="d11">[1202714321, 408495041]</data>
       <data key="d12">tertiary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">270.65505925705946</data>
@@ -76740,7 +76740,7 @@
     <edge source="4104103167" target="4104104004" id="0">
       <data key="d11">[408495044, 723226126]</data>
       <data key="d12">tertiary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">175.38049926129926</data>
@@ -76757,7 +76757,7 @@
     <edge source="4104103171" target="4028582133" id="0">
       <data key="d11">[408495041, 1202714321]</data>
       <data key="d12">tertiary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">270.65505925705946</data>
@@ -76783,7 +76783,7 @@
     <edge source="4104104004" target="4104103167" id="0">
       <data key="d11">[408495044, 723226126]</data>
       <data key="d12">tertiary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">175.38049926129926</data>
@@ -77130,7 +77130,7 @@
     <edge source="4625385209" target="251009235" id="1">
       <data key="d11">[1019253025, 23206617, 467977711]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue de Dixmude', 'Allée Charles Trenet', 'Rue Étienne et Raymonde Mauchaussé']</data>
+      <data key="d15">['Allée Charles Trenet', 'Rue Étienne et Raymonde Mauchaussé', 'Rue de Dixmude']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">319.59681515986017</data>
@@ -77794,7 +77794,7 @@
     <edge source="5225321966" target="58556836" id="0">
       <data key="d11">[4571281, 997985203, 997985204, 997983614]</data>
       <data key="d12">primary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">['Avenue du Premier Consul', 'Avenue Albert 1er']</data>
       <data key="d16">True</data>
@@ -77926,9 +77926,9 @@
     <edge source="5250302357" target="27511562" id="0">
       <data key="d11">[23237744, 524769828, 778567608]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
-      <data key="d15">['Place Gaston Gérard', 'Boulevard Trimolet']</data>
+      <data key="d15">['Boulevard Trimolet', 'Place Gaston Gérard']</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">326.863133229043</data>
@@ -78098,7 +78098,7 @@
     <edge source="5255463950" target="27513419" id="0">
       <data key="d11">[1317112875, 7834533, 23575631]</data>
       <data key="d12">secondary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d14">50</data>
       <data key="d15">['Boulevard de Champagne', 'Avenue Raymond Poincaré']</data>
       <data key="d16">False</data>
@@ -80089,7 +80089,7 @@
     <edge source="6673977049" target="6673977050" id="0">
       <data key="d11">[709943021, 709943022]</data>
       <data key="d12">residential</data>
-      <data key="d15">['Rue Georges Serraz', 'Rue Charles Oursel']</data>
+      <data key="d15">['Rue Charles Oursel', 'Rue Georges Serraz']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">42.774650101284045</data>
@@ -80253,7 +80253,7 @@
       <data key="d11">[713104670, 713104671]</data>
       <data key="d22">yes</data>
       <data key="d12">secondary</data>
-      <data key="d20">['1', '2']</data>
+      <data key="d20">['2', '1']</data>
       <data key="d14">50</data>
       <data key="d15">Avenue Gustave Eiffel</data>
       <data key="d16">True</data>
@@ -81607,7 +81607,7 @@
     <edge source="8068821069" target="260139642" id="0">
       <data key="d11">[23516723, 1077236859]</data>
       <data key="d12">tertiary</data>
-      <data key="d20">['2', '3']</data>
+      <data key="d20">['3', '2']</data>
       <data key="d15">Rue Auguste Fremiet</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
@@ -84363,7 +84363,7 @@
       <data key="d11">[1321843588, 240572477, 23361534]</data>
       <data key="d12">residential</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Bossuet', 'Place Bossuet']</data>
+      <data key="d15">['Place Bossuet', 'Rue Bossuet']</data>
       <data key="d16">False</data>
       <data key="d17">True</data>
       <data key="d18">71.88050329122815</data>
@@ -84506,7 +84506,7 @@
       <data key="d11">[23757752, 288509357]</data>
       <data key="d12">residential</data>
       <data key="d14">50</data>
-      <data key="d15">["Square du Creux d'Enfer", 'Rue Charles Royer']</data>
+      <data key="d15">['Rue Charles Royer', "Square du Creux d'Enfer"]</data>
       <data key="d16">False</data>
       <data key="d17">False</data>
       <data key="d18">147.10025341914167</data>
@@ -84767,7 +84767,7 @@
       <data key="d12">residential</data>
       <data key="d20">1</data>
       <data key="d14">30</data>
-      <data key="d15">['Rue Verrerie', 'Rue Chaudronnerie']</data>
+      <data key="d15">['Rue Chaudronnerie', 'Rue Verrerie']</data>
       <data key="d16">True</data>
       <data key="d17">False</data>
       <data key="d18">46.310967928232316</data>
@@ -84966,7 +84966,7 @@
       <data key="d18">30.2825782081703</data>
       <data key="d19">LINESTRING (5.0179216 47.3041719, 5.0178404 47.30407, 5.0178096 47.3039963, 5.017821 47.3039545, 5.0178443 47.3039206)</data>
     </edge>
-    <data key="d0">2025-11-03 02:18:20</data>
+    <data key="d0">2025-11-03 10:11:06</data>
     <data key="d1">OSMnx 2.0.6</data>
     <data key="d2">epsg:4326</data>
     <data key="d3">True</data>
