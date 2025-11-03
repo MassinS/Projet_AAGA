@@ -6,63 +6,21 @@ import matplotlib.pyplot as plt
 
 def get_city_graph(city_name, network_type='drive', save_local=True):
     """
-    Télécharge le graphe d'une ville via OSMnx, ou le charge depuis un fichier si déjà sauvegardé.
-    Les fichiers .graphml sont enregistrés dans ../../data
+    Télécharge le graphe routier EXACT d'une ville, tel que défini dans OpenStreetMap.
+    Aucune conversion, aucune simplification, aucun filtrage.
+    On obtient un MultiDiGraph orienté avec sens uniques réels.
     """
-    data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'data'))
-    os.makedirs(data_dir, exist_ok=True)
-
-    filename = city_name.replace(',', '').replace(' ', '_') + '.graphml'
-    file_path = os.path.join(data_dir, filename)
-
-    if save_local and os.path.exists(file_path):
-        print(f"📂 Chargement du graphe local : {file_path}")
-        G = ox.load_graphml(file_path)
-        return G
-
-    print(f"⏳ Téléchargement du graphe pour {city_name}...")
-    G = ox.graph_from_place(city_name, network_type=network_type)
-    G = G.to_undirected()
-
-    if save_local:
-        ox.save_graphml(G, file_path)
-        print(f"💾 Graphe sauvegardé dans {file_path}")
-
-    print(f"✅ Graphe téléchargé : {len(G.nodes)} nœuds, {len(G.edges)} arêtes")
+    print(f"⏳ Téléchargement du graphe brut pour {city_name}...")
+    
+    # 1️⃣ Télécharger le graphe routier tel qu’il est dans OSM
+    G = ox.graph_from_place(city_name, network_type='drive')
+    # 2️⃣ Afficher quelques infos
+    print(f"✅ Graphe téléchargé : {len(G.nodes())} nœuds, {len(G.edges())} arêtes")
+    print(f"🔹 Type : {type(G)}")
+    print(f"🔹 Dirigé ? {G.is_directed()}")
+    
     return G
 
-
-def get_oriented_city_graph(city_name, save_local=True):
-    """
-    Télécharge ou charge un graphe routier orienté (MultiDiGraph) d'une ville.
-    Les fichiers sont enregistrés dans ../../data
-    """
-    data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'data'))
-    os.makedirs(data_dir, exist_ok=True)
-
-    filename = city_name.replace(',', '').replace(' ', '_') + '_oriented.graphml'
-    file_path = os.path.join(data_dir, filename)
-
-    if save_local and os.path.exists(file_path):
-        print(f"📂 Chargement du graphe orienté local : {file_path}")
-        G = ox.load_graphml(file_path)
-    else:
-        print(f"⏳ Téléchargement du graphe orienté pour {city_name}...")
-        G = ox.graph_from_place(city_name, network_type='drive')
-
-        print("🔍 Extraction de la plus grande composante fortement connexe...")
-        if not nx.is_strongly_connected(G):
-            largest_cc = max(nx.strongly_connected_components(G), key=len)
-            G = G.subgraph(largest_cc).copy()
-            print(f"✅ Graphe réduit à {len(G.nodes())} sommets et {len(G.edges())} arêtes")
-
-        if save_local:
-            ox.save_graphml(G, file_path)
-            print(f"💾 Graphe orienté sauvegardé dans : {file_path}")
-
-    print(f"✅ Graphe orienté prêt : {len(G.nodes())} sommets, {len(G.edges())} arêtes")
-    print(f"🔹 Type : {'dirigé' if G.is_directed() else 'non dirigé'}")
-    return G
 
 
 def plot_city_graph(G, city_name, top_nodes=None, mode="classic"):

@@ -2,14 +2,14 @@ import time
 import networkx as nx
 import matplotlib.pyplot as plt
 import pandas as pd
-from utils.graph_utils import get_oriented_city_graph
+from utils.graph_utils import get_city_graph
 from classic_closeness.classic_closeness import closeness_centrality_all_nodes
 from efficient_closeness import top_k_closeness
 import os
 
 def compare_top5(city):
     """Compare les top-5 entre version classique et optimisée pour une ville donnée."""
-    G = get_oriented_city_graph(city)
+    G = get_city_graph(city)
     n, m = len(G.nodes()), len(G.edges())
 
     print(f"📂 Chargement du graphe orienté local : {city}")
