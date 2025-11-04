@@ -37,29 +37,29 @@ def osmnx_to_temporal_graph(G_osmnx, T_max=100, lambda_max=10, seed=None):
 # ------------------------------------------------------------
 # Extraction de la plus grande composante connexe
 # ------------------------------------------------------------
-def get_largest_strongly_connected_component(G):
+def get_largest_component(G):
     """
     Récupère la plus grande composante fortement (ou simplement) connexe.
     """
     if G.is_directed():
         comps = list(nx.strongly_connected_components(G))
-        largest = max(comps, key=len)
-        return G.subgraph(largest).copy()
     else:
         comps = list(nx.connected_components(G))
-        largest = max(comps, key=len)
-        return G.subgraph(largest).copy()
+    largest = max(comps, key=len)
+    return G.subgraph(largest).copy()
 
 
 # ------------------------------------------------------------
 # Visualisation des Top-k sur le graphe routier
 # ------------------------------------------------------------
-def plot_topk_on_city(G_static, topk_nodes, city, save_dir="visualisation/temporel"):
+def plot_topk_on_city(G_static, topk_nodes, city, save_dir, oriented):
     """
     Affiche le graphe routier d'une ville avec les Top-k sommets mis en évidence.
     - G_static : graphe OSMnx (statique)
     - topk_nodes : liste des identifiants de nœuds à surligner
     - city : nom de la ville (pour le titre et le nom du fichier)
+    - save_dir : dossier où sauvegarder l’image
+    - oriented : booléen, True si graphe orienté
     """
     fig, ax = ox.plot_graph(
         G_static,
@@ -70,7 +70,6 @@ def plot_topk_on_city(G_static, topk_nodes, city, save_dir="visualisation/tempor
         close=False
     )
 
-    # ✅ Affiche les coordonnées des nœuds top-k
     node_x = [G_static.nodes[n]["x"] for n in topk_nodes if n in G_static.nodes]
     node_y = [G_static.nodes[n]["y"] for n in topk_nodes if n in G_static.nodes]
 
@@ -81,11 +80,12 @@ def plot_topk_on_city(G_static, topk_nodes, city, save_dir="visualisation/tempor
         for i, (x, y) in enumerate(zip(node_x, node_y)):
             ax.text(x, y, f"{i+1}", color="white", fontsize=6, zorder=4)
 
+    mode = "orienté" if oriented else "non orienté"
     ax.legend(facecolor="black", edgecolor="white", labelcolor="white")
-    ax.set_title(f"Graphe routier de {city}", color="white")
+    ax.set_title(f"{city} ({mode})", color="white")
 
     os.makedirs(save_dir, exist_ok=True)
-    path = os.path.join(save_dir, f"{city.replace(',', '').replace(' ', '_')}_graph.png")
+    path = os.path.join(save_dir, f"{city.replace(',', '').replace(' ', '_')}_{'oriented' if oriented else 'no_oriented'}.png")
     plt.savefig(path, dpi=300, bbox_inches="tight", facecolor="black")
     plt.close(fig)
 
@@ -93,57 +93,81 @@ def plot_topk_on_city(G_static, topk_nodes, city, save_dir="visualisation/tempor
 
 
 # ------------------------------------------------------------
-# Benchmark principal pour une ville
+# Benchmark pour un type de graphe (orienté ou non orienté)
 # ------------------------------------------------------------
-def benchmark_city(city, k=5, T_max=100, interval=(0, 100)):
+def benchmark_city_graph(G_static, city, k=5, T_max=100, interval=(0, 100), oriented=True):
     """
-    Exécute le benchmark de l’Algorithme 2 (Top-k Temporal Closeness)
-    sur le graphe complet de la ville.
+    Exécute l’algorithme 2 pour un graphe donné (orienté ou non orienté)
     """
-    print(f"\n🏙️  {city}")
-    try:
-        # Chargement du graphe routier complet de la ville
-        G_static = ox.graph_from_place(city, network_type="drive")
+    mode = "orienté" if oriented else "non orienté"
+    folder = f"visualisation/temporel_{'oriented' if oriented else 'no_oriented'}"
+    print(f"   ▶️  Traitement du graphe {mode}...")
 
-        # Extraction de la composante fortement connexe principale
-        G_static = get_largest_strongly_connected_component(G_static)
+    try:
+        # Extraction composante principale
+        G_static = get_largest_component(G_static)
         num_nodes = len(G_static.nodes())
         num_edges = len(G_static.edges())
 
-        print(f"   📊 Graphe complet : {num_nodes} nœuds, {num_edges} arêtes")
+        print(f"   📊 Graphe {mode} : {num_nodes} nœuds, {num_edges} arêtes")
 
         # Conversion en graphe temporel
         G_temp = osmnx_to_temporal_graph(G_static, T_max=T_max, lambda_max=5, seed=42)
 
-        # Exécution de l’Algorithme 2
-        print("   🔍 Calcul avec l’Algorithme 2 (Top-k Temporal Closeness)...")
+        # Exécution Algo 2
         start = time.perf_counter()
         result_topk = topk_temporal_closeness(G_temp, k=k, interval=interval)
         t_algo2 = time.perf_counter() - start
 
-        print(f"⏱️  Temps Algo 2 = {t_algo2:.3f} s")
+        print(f"⏱️  Temps Algo 2 ({mode}) = {t_algo2:.3f} s")
 
-        # 5️⃣ Extraire les IDs des top-k noeuds
+        # Extraction top-k
         topk_nodes = [node for _, node in result_topk]
-        print(f"   🔺 Nœuds top-{k} : {topk_nodes}")
+        print(f"   🔺 Nœuds top-{k} ({mode}) : {topk_nodes}")
 
-        # 6️⃣ Visualisation
-        plot_topk_on_city(G_static, topk_nodes, city)
+        # Visualisation
+        plot_topk_on_city(G_static, topk_nodes, city, save_dir=folder, oriented=oriented)
 
-        # 7️⃣ Retourner les résultats
         return {
             "city": city,
             "nodes": num_nodes,
             "edges": num_edges,
             "k": k,
             "algo2_time_s": round(t_algo2, 6),
+            "oriented": oriented
         }
 
     except Exception as e:
-        print(f"⚠️  Erreur sur {city} : {e}")
+        print(f"⚠️  Erreur pour {city} ({mode}) : {e}")
         import traceback
         traceback.print_exc()
         return None
+
+
+# ------------------------------------------------------------
+# Benchmark principal (pour chaque ville)
+# ------------------------------------------------------------
+def benchmark_city(city, k=5, T_max=100, interval=(0, 100)):
+    """
+    Lance le benchmark pour le graphe orienté et non orienté d'une même ville.
+    """
+    print(f"\n🏙️  {city}")
+
+    results_city = []
+
+    # --- Graphe orienté ---
+    G_oriented = ox.graph_from_place(city, network_type="drive")
+    res_oriented = benchmark_city_graph(G_oriented, city, k, T_max, interval, oriented=True)
+    if res_oriented:
+        results_city.append(res_oriented)
+
+    # --- Graphe non orienté ---
+    G_unoriented = G_oriented.to_undirected()
+    res_unoriented = benchmark_city_graph(G_unoriented, city, k, T_max, interval, oriented=False)
+    if res_unoriented:
+        results_city.append(res_unoriented)
+
+    return results_city
 
 
 # ------------------------------------------------------------
@@ -167,22 +191,25 @@ if __name__ == "__main__":
     os.makedirs("results", exist_ok=True)
     csv_path = os.path.join("results", "results_osmnx_algo2_full.csv")
 
-    print("=== 🧭 Benchmark Algo 2 — Top-k Temporal Closeness sur graphes complets ===")
+    print("=== 🧭 Benchmark Algo 2 — Top-k Temporal Closeness (orienté & non orienté) ===")
 
     for city in cities:
-        result = benchmark_city(city, k=5)
-        if result:
-            results.append(result)
-        print(f"{'=' * 60}")
+        city_results = benchmark_city(city, k=5)
+        if city_results:
+            results.extend(city_results)
+        print(f"{'=' * 70}")
 
     # Sauvegarde CSV
     if results:
         with open(csv_path, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["city", "nodes", "edges", "k", "algo2_time_s"])
+            writer = csv.DictWriter(
+                f,
+                fieldnames=["city", "nodes", "edges", "k", "algo2_time_s", "oriented"]
+            )
             writer.writeheader()
             writer.writerows(results)
 
         print(f"\n✅ Résultats enregistrés dans : {csv_path}")
-        print(f"📊 {len(results)} villes traitées avec succès")
+        print(f"📊 {len(results)} exécutions terminées avec succès (2 par ville)")
     else:
         print("❌ Aucun résultat à enregistrer")

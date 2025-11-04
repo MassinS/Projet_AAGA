@@ -6,6 +6,31 @@ import matplotlib.pyplot as plt
 
 def get_city_graph(city_name, network_type='drive', save_local=True):
     """
+    Télécharge le graphe d'une ville via OSMnx, ou le charge depuis un fichier si déjà sauvegardé.
+    Les fichiers .graphml sont enregistrés dans ../../data
+    """
+    
+
+    print(f"⏳ Téléchargement du graphe pour {city_name}...")
+    G = ox.graph_from_place(city_name, network_type=network_type)
+    G = G.to_undirected()
+
+    if save_local:
+        data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'data'))
+        os.makedirs(data_dir, exist_ok=True)
+
+        filename = city_name.replace(',', '').replace(' ', '_') + '.graphml'
+        file_path = os.path.join(data_dir, filename)
+        
+        ox.save_graphml(G, file_path)
+        print(f"💾 Graphe sauvegardé dans {file_path}")
+
+    print(f"✅ Graphe téléchargé : {len(G.nodes)} nœuds, {len(G.edges)} arêtes")
+    return G
+
+
+def get_oriented_city_graph(city_name, network_type='drive', save_local=True):
+    """
     Télécharge le graphe routier EXACT d'une ville depuis OpenStreetMap
     et le sauvegarde dans le dossier data/ sous forme de fichier .graphml.
 
@@ -36,14 +61,12 @@ def get_city_graph(city_name, network_type='drive', save_local=True):
 
     return G
 
-
-
 def plot_city_graph(G, city_name, top_nodes=None, mode="classic"):
     """
     Sauvegarde le graphe dans le dossier ../../visualisation/<mode>/
     Les 5 nœuds les plus centraux sont affichés en rouge.
-    - mode="classic"  => graph/classic/
-    - mode="efficient" => graph/efficient/
+    - mode="classic"  => visualisation/classic/
+    - mode="efficient" => visualisation/efficient/
     """
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'visualisation'))
     output_dir = os.path.join(base_dir, mode)
