@@ -44,10 +44,10 @@ def get_oriented_city_graph(city_name, network_type='drive', save_local=True):
     """
     print(f"⏳ Téléchargement du graphe brut pour {city_name}...")
 
-    # 1️⃣ Télécharger le graphe routier
+    # 1 Télécharger le graphe routier
     G = ox.graph_from_place(city_name, network_type=network_type)
 
-    # 2️⃣ Sauvegarder localement dans le dossier data/
+    # 2 Sauvegarder localement dans le dossier data/
     if save_local:
         data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'data'))
         os.makedirs(data_dir, exist_ok=True)
