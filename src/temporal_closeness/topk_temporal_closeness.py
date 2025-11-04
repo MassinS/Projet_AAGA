@@ -36,22 +36,22 @@ def topk_temporal_closeness(G: TemporalGraph, k: int, interval=(0, 100)):
     # --- Boucle principale sur chaque sommet source ---
     for u in sources:
 
-        # 1️⃣ Exécuter l’algo 1 pour récupérer les distances minimales
+        # 1 Exécuter l’algo 1 pour récupérer les distances minimales
         d = fastest_paths(G, source=u, interval=interval)
 
-        # 2️⃣ Construire R = sommets atteignables
+        # 2 Construire R = sommets atteignables
         R = [v for v in d if d[v] < float("inf")]
         len_R = len(R)
         if len_R <= 1:
             continue  # rien d'atteignable
 
-        # 3️⃣ Variables de suivi
+        # 3 Variables de suivi
         F = set()
         T = set()
         S_F = 0.0
         d_next = 1.0
 
-        # 4️⃣ Parcours des sommets atteignables triés par durée
+        # 4 Parcours des sommets atteignables triés par durée
         sorted_nodes = sorted([v for v in R if v != u], key=lambda x: d[x])
 
         for i, v in enumerate(sorted_nodes):
@@ -80,25 +80,21 @@ def topk_temporal_closeness(G: TemporalGraph, k: int, interval=(0, 100)):
             if c_hat < B_k:
                 break
 
-        # 5️⃣ Calcul final de la closeness du sommet u
+        # 5 Calcul final de la closeness du sommet u
         c_u = S_F
 
-        # 6️⃣ Mise à jour du Top-k global
+        # 6 Mise à jour du Top-k global
         heapq.heappush(topk, (c_u, u))
         if len(topk) > k:
             heapq.heappop(topk)
         B_k = topk[0][0]
 
-    # --- Résultat final ---
     topk_sorted = sorted(topk, reverse=True)
 
-    # ✅ Retourne la liste [(closeness, node)] pour la visualisation et le benchmark
     return topk_sorted
 
 
-# --------------------------------------------------
-# Test local simple
-# --------------------------------------------------
+# Test local 
 if __name__ == "__main__":
     G = TemporalGraph()
     G.add_edge("A", "B", 1, 2)
@@ -120,5 +116,5 @@ if __name__ == "__main__":
     res = topk_temporal_closeness(G, k=k, interval=interval)
     end_time = time.perf_counter()
 
-    print("\n⏱️ Temps total d'exécution : {:.6f} secondes".format(end_time - start_time))
+    print("\n Temps total d'exécution : {:.6f} secondes".format(end_time - start_time))
     print("Résultat top-k :", res)

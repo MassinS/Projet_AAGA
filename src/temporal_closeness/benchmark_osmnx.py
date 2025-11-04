@@ -74,7 +74,7 @@ def plot_topk_on_city(G_static, topk_nodes, city, save_dir, oriented):
     node_y = [G_static.nodes[n]["y"] for n in topk_nodes if n in G_static.nodes]
 
     if len(node_x) == 0:
-        print("⚠️  Aucun nœud top-k trouvé dans le graphe statique ! (vérifie les IDs)")
+        print(" Aucun nœud top-k trouvé dans le graphe statique ! (vérifie les IDs)")
     else:
         ax.scatter(node_x, node_y, c="red", s=50, label="Top closeness", zorder=3)
         for i, (x, y) in enumerate(zip(node_x, node_y)):
@@ -89,7 +89,7 @@ def plot_topk_on_city(G_static, topk_nodes, city, save_dir, oriented):
     plt.savefig(path, dpi=300, bbox_inches="tight", facecolor="black")
     plt.close(fig)
 
-    print(f"🖼️  Graphe sauvegardé dans : {path}")
+    print(f" Graphe sauvegardé dans : {path}")
 
 
 # ------------------------------------------------------------
@@ -101,7 +101,7 @@ def benchmark_city_graph(G_static, city, k=5, T_max=100, interval=(0, 100), orie
     """
     mode = "orienté" if oriented else "non orienté"
     folder = f"visualisation/temporel_{'oriented' if oriented else 'no_oriented'}"
-    print(f"   ▶️  Traitement du graphe {mode}...")
+    print(f"  Traitement du graphe {mode}...")
 
     try:
         # Extraction composante principale
@@ -109,7 +109,7 @@ def benchmark_city_graph(G_static, city, k=5, T_max=100, interval=(0, 100), orie
         num_nodes = len(G_static.nodes())
         num_edges = len(G_static.edges())
 
-        print(f"   📊 Graphe {mode} : {num_nodes} nœuds, {num_edges} arêtes")
+        print(f" Graphe {mode} : {num_nodes} nœuds, {num_edges} arêtes")
 
         # Conversion en graphe temporel
         G_temp = osmnx_to_temporal_graph(G_static, T_max=T_max, lambda_max=5, seed=42)
@@ -119,11 +119,11 @@ def benchmark_city_graph(G_static, city, k=5, T_max=100, interval=(0, 100), orie
         result_topk = topk_temporal_closeness(G_temp, k=k, interval=interval)
         t_algo2 = time.perf_counter() - start
 
-        print(f"⏱️  Temps Algo 2 ({mode}) = {t_algo2:.3f} s")
+        print(f" Temps Algo 2 ({mode}) = {t_algo2:.3f} s")
 
         # Extraction top-k
         topk_nodes = [node for _, node in result_topk]
-        print(f"   🔺 Nœuds top-{k} ({mode}) : {topk_nodes}")
+        print(f"  Nœuds top-{k} ({mode}) : {topk_nodes}")
 
         # Visualisation
         plot_topk_on_city(G_static, topk_nodes, city, save_dir=folder, oriented=oriented)
@@ -138,7 +138,7 @@ def benchmark_city_graph(G_static, city, k=5, T_max=100, interval=(0, 100), orie
         }
 
     except Exception as e:
-        print(f"⚠️  Erreur pour {city} ({mode}) : {e}")
+        print(f"Erreur pour {city} ({mode}) : {e}")
         import traceback
         traceback.print_exc()
         return None
@@ -151,17 +151,17 @@ def benchmark_city(city, k=5, T_max=100, interval=(0, 100)):
     """
     Lance le benchmark pour le graphe orienté et non orienté d'une même ville.
     """
-    print(f"\n🏙️  {city}")
+    print(f"\n {city}")
 
     results_city = []
 
-    # --- Graphe orienté ---
+    #  Graphe orienté 
     G_oriented = ox.graph_from_place(city, network_type="drive")
     res_oriented = benchmark_city_graph(G_oriented, city, k, T_max, interval, oriented=True)
     if res_oriented:
         results_city.append(res_oriented)
 
-    # --- Graphe non orienté ---
+    # Graphe non orienté 
     G_unoriented = G_oriented.to_undirected()
     res_unoriented = benchmark_city_graph(G_unoriented, city, k, T_max, interval, oriented=False)
     if res_unoriented:
@@ -170,9 +170,7 @@ def benchmark_city(city, k=5, T_max=100, interval=(0, 100)):
     return results_city
 
 
-# ------------------------------------------------------------
-# Point d'entrée principal
-# ------------------------------------------------------------
+# Test local 
 if __name__ == "__main__":
     cities = [
         "Paris, France",
@@ -191,7 +189,7 @@ if __name__ == "__main__":
     os.makedirs("results", exist_ok=True)
     csv_path = os.path.join("results", "results_osmnx_algo2_full.csv")
 
-    print("=== 🧭 Benchmark Algo 2 — Top-k Temporal Closeness (orienté & non orienté) ===")
+    print(" Benchmark Algo 2 — Top-k Temporal Closeness (orienté & non orienté) ")
 
     for city in cities:
         city_results = benchmark_city(city, k=5)
@@ -209,7 +207,7 @@ if __name__ == "__main__":
             writer.writeheader()
             writer.writerows(results)
 
-        print(f"\n✅ Résultats enregistrés dans : {csv_path}")
-        print(f"📊 {len(results)} exécutions terminées avec succès (2 par ville)")
+        print(f"\n Résultats enregistrés dans : {csv_path}")
+
     else:
-        print("❌ Aucun résultat à enregistrer")
+        print(" Aucun résultat à enregistrer")

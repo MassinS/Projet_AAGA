@@ -4,7 +4,7 @@
 
 from collections import defaultdict
 
-# --- 1) Classe TemporalEdge ---
+# La classe TemporalEdge représente une arête temporelle
 class TemporalEdge:
     def __init__(self, u, v, t, l):
         self.u = u
@@ -15,7 +15,7 @@ class TemporalEdge:
         return f"({self.u}->{self.v}, t={self.t}, λ={self.l})"
 
 
-# --- 2) Classe TemporalGraph ---
+# La classe TemporalGraph représente un graphe temporel
 class TemporalGraph:
     def __init__(self):
         self.V = set() # pour stocker les sommets
@@ -41,7 +41,7 @@ class TemporalGraph:
         return "\n".join([f"{u}: {self.adj[u]}" for u in self.adj])
 
 
-# --- 3 Tests pour vérifier la structure du graphe ---
+# Test local 
 if __name__ == "__main__":
     G = TemporalGraph()
     G.add_edge("A", "B", 1, 2)

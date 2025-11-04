@@ -1,6 +1,5 @@
 # ======================================
 # Algorithm 1: Label-setting Fastest Paths
-# (durées minimales temporelles depuis une source)
 # ======================================
 
 from dataclasses import dataclass
@@ -123,7 +122,7 @@ def fastest_paths(G, source: Any, interval: Tuple[float, float]) -> Dict[Any, fl
                     # Dominance: si un label existant vers e.v est meilleur, on ignore celui-ci
                     if not _is_dominated(new_lab, Π[e.v]):
                         Π[e.v].append(new_lab)
-                        # Optionnel: "nettoyer" Π[e.v] pour ne garder que les meilleurs
+                        #  "Nettoyer" Π[e.v] pour ne garder que les meilleurs ( D'apès le document , c'est optionnel la suppréssion des labels dominés)
                         Π[e.v] = _prune_dominated(Π[e.v])
 
                         counter += 1
@@ -133,28 +132,26 @@ def fastest_paths(G, source: Any, interval: Tuple[float, float]) -> Dict[Any, fl
     return d
 
 
-# --- TEST LOCAL ---
+# Test local 
 if __name__ == "__main__":
-    # 1️⃣ Création d’un graphe temporel
+  
     G = TemporalGraph()
-    G.add_edge("A", "B", 1, 2)   # active de 1 à 3
-    G.add_edge("A", "C", 2, 3)   # active de 2 à 5
-    G.add_edge("B", "D", 4, 2)   # active de 4 à 6
-    G.add_edge("C", "D", 6, 1)   # active de 6 à 7
-    G.add_edge("D", "E", 8, 1)   # active de 8 à 9
-    G.add_edge("B", "E", 10, 2)  # active de 10 à 12
-    G.add_edge("E", "F", 12, 1)  # active de 12 à 13
+    G.add_edge("A", "B", 1, 2)   
+    G.add_edge("A", "C", 2, 3)   
+    G.add_edge("B", "D", 4, 2)   
+    G.add_edge("C", "D", 6, 1)   
+    G.add_edge("D", "E", 8, 1)   
+    G.add_edge("B", "E", 10, 2)  
+    G.add_edge("E", "F", 12, 1)  
 
     print("=== Graphe ===")
     print(G)
     print()
 
-    # 2️⃣ Lancer l’algorithme depuis la source A
     interval = (0, 20)
     print(f"=== Fastest paths depuis 'A' dans l'intervalle {interval} ===")
 
     d = fastest_paths(G, source="A", interval=interval)
 
-    # 3️⃣ Afficher les résultats
     for v in sorted(G.V):
         print(f"{v} : {d[v]}")
