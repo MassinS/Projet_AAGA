@@ -1,6 +1,6 @@
-# 🚀 Efficient Top-k Closeness Centrality Search
+#  Efficient Top-k Closeness Centrality Search
 
-## 📘 Description du projet
+##  Description du projet
 
 Ce projet a été réalisé dans le cadre du module **AAGA — Algorithmique Avancée des Graphes et Applications** (M2 STL, Sorbonne Université).
 Il vise à **comparer et optimiser le calcul de la centralité de proximité (closeness centrality)** sur différents types de graphes.
@@ -13,7 +13,7 @@ Trois variantes d’algorithmes sont étudiées :
 
 ---
 
-## 🧩 Objectifs
+##  Objectifs
 
 1. Implémenter les trois algorithmes de centralité.
 2. Comparer leurs performances sur plusieurs villes françaises (graphes OSMnx).
@@ -23,7 +23,7 @@ Trois variantes d’algorithmes sont étudiées :
 
 ---
 
-## 🏗️ Architecture du projet
+##  Architecture du projet
 
 ```bash
 Projet_AAGA/
@@ -81,7 +81,7 @@ Projet_AAGA/
 
 ---
 
-## ⚙️ Dépendances
+## Dépendances
 
 ```bash
 pip install networkx osmnx matplotlib pandas numpy tqdm shapely geopandas requests
@@ -90,9 +90,9 @@ python3 -m pip install tabulate --user
 
 ---
 
-## 🧮 Description des algorithmes
+##  Description des algorithmes
 
-### 1️⃣ Algorithme classique
+### 1 Algorithme classique
 
 Pour chaque nœud `v` :
 
@@ -103,7 +103,7 @@ Pour chaque nœud `v` :
 
 ---
 
-### 2️⃣ Algorithme efficient (Olsen et al., 2014)
+### 2 Algorithme efficient (Olsen et al., 2014)
 
 * Réutilise les BFS partiels déjà effectués.
 * Utilise une **ordonnancement** et une **borne supérieure dynamique** pour ignorer des calculs redondants.
@@ -111,7 +111,7 @@ Pour chaque nœud `v` :
 
 ---
 
-### 3️⃣ Algorithme temporel (Oettershagen & Mutzel, 2020)
+### 3 Algorithme temporel (Oettershagen & Mutzel, 2020)
 
 * Appliqué sur des **graphes temporels (u,v,t,λ)**.
 * Recherche les sommets ayant la plus petite distance temporelle moyenne.
@@ -119,9 +119,9 @@ Pour chaque nœud `v` :
 
 ---
 
-## 🧠 Programmes principaux
+## Programmes principaux
 
-### 🧱 Calculs et visualisations de base
+### Calculs et visualisations de base
 
 | Script                                          | Description                                                               | Sortie                         |
 | ----------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------ |
@@ -132,7 +132,7 @@ Pour chaque nœud `v` :
 
 ---
 
-### ⚖️ Comparaisons globales
+###  Comparaisons globales
 
 | Script                                    | Description                                                    | Sortie                                                            |
 | ----------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -142,18 +142,18 @@ Pour chaque nœud `v` :
 
 ---
 
-### ⏳ Benchmark temporel
+### Benchmark temporel
 
 | Script                                    | Description                                                    | Sortie                                                            |
 | ----------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- |
 | `temporal_closeness/benchmark_osmnx.py` | Exécute l’**Algorithme 2** sur graphes OSMnx (orienté et non orienté). | `visualisation/temporel_oriented/`, `visualisation/temporel_no_oriented/`, `results/results_osmnx_algo2_full.csv` |
 
 ---
-## 🖥️ Commandes d’exécution individuelles
+## Commandes d’exécution individuelles
 
 > Ces commandes peuvent être exécutées directement depuis la racine du projet (`Projet_AAGA/`).
 
-### ▶️ Lancer les programmes principaux
+### Lancer les programmes principaux
 
 ```bash
 # Algorithmes classiques
@@ -165,7 +165,7 @@ python3 src/main_efficient_closeness_no_oriented_graph.py
 python3 src/main_efficient_closeness_oriented_graph.py
 ```
 
-### ▶️ Lancer les comparaisons globales
+### Lancer les comparaisons globales
 
 ```bash
 # Comparaison Classic vs Efficient (non orienté)
@@ -178,7 +178,7 @@ python3 src/compare_algorithms_oriented_graph.py
 python3 src/compare_algorithms_oriented_others.py
 ```
 
-### ▶️ Lancer le benchmark temporel
+### Lancer le benchmark temporel
 
 ```bash
 # Benchmark Algo 2 — Top-k Temporal Closeness (orienté & non orienté)
@@ -186,19 +186,19 @@ python3 src/temporal_closeness/benchmark_osmnx.py
 ```
 ---
 
-## 🧪 Comparaisons et indicateurs
+## Comparaisons et indicateurs
 
 | Indicateur             | Description                                    |
 | ---------------------- | ---------------------------------------------- |
-| ⏱️ **Temps classique** | Temps total de l’algorithme naïf               |
-| ⚡ **Temps efficient**  | Temps total de l’algorithme optimisé           |
-| 🚀 **Gain (%)**        | Gain relatif en pourcentage                    |
-| 🔁 **Overlap (%)**     | Recouvrement entre les Top-5 des deux méthodes |
-| 📈 **Speed-up (×)**    | Facteur d’accélération (Classic / Efficient)   |
+|  **Temps classique** | Temps total de l’algorithme naïf               |
+|  **Temps efficient**  | Temps total de l’algorithme optimisé           |
+|  **Gain (%)**        | Gain relatif en pourcentage                    |
+|  **Overlap (%)**     | Recouvrement entre les Top-5 des deux méthodes |
+|  **Speed-up (×)**    | Facteur d’accélération (Classic / Efficient)   |
 
 ---
 
-## 📊 Résultats typiques
+## Résultats typiques
 
 ### Exemple : `resume_no_oriented.csv`
 
@@ -217,9 +217,9 @@ python3 src/temporal_closeness/benchmark_osmnx.py
 * `visualisation/*/*.png` — Top-5 par ville
 ---
 
-## 🧰 Script global d’exécution
+##  Script global d’exécution
 
-### ▶️ `run_all_simulations.sh`
+### `run_all_simulations.sh`
 
 ```bash
 chmod +x run_all_simulations.sh
@@ -237,14 +237,14 @@ Ce script exécute automatiquement :
 
 ---
 
-## 📚 Références
+## Références
 
 1. **Oettershagen, L. & Mutzel, P. (2020)** — *Efficient Top-k Temporal Closeness Calculation in Temporal Networks*, IEEE ICDM.
 2. **Olsen, P. W., Labouseur, A. G., & Hwang, J-H. (2014)** — *Efficient Top-k Closeness Centrality Search*, IEEE ICDE.
 
 ---
 
-## 👩‍💻 Auteurs
+## Auteurs
 
 **Massin Sadi**, **Aksil Sadi**, **Meriem Benaissa**
 Master 2 — *Sciences et Technologies du Logiciel (STL)*
@@ -252,10 +252,9 @@ Université Sorbonne — 2025
 
 ---
 
-## 🧠 Prolongements possibles
+## Prolongements possibles
 
 * Étendre l’étude à des graphes **dynamiques Δ-PFS**
 * Étudier l’évolution temporelle de la centralité
 * Ajouter des **graphes aléatoires ou massifs** pour évaluer la scalabilité
 * Comparer avec d’autres mesures : **betweenness**, **eigenvector**, etc.
-
