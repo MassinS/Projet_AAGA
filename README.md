@@ -6,8 +6,7 @@ Ce projet s’inscrit dans le cadre du module **AAGA (Algorithmique Avancée des
 et vise à **comparer deux approches de calcul de la centralité de proximité (closeness centrality)** :
 
 1. **L’algorithme classique**, qui calcule la centralité de chaque nœud indépendamment (BFS complet).  
-2. **L’algorithme efficient (Olsen et al., 2014)**, qui partage les résultats intermédiaires et planifie les explorations  
-   afin de réduire les calculs redondants.
+2. **L’algorithme efficient (Olsen et al., 2014)**, qui partage les résultats intermédiaires et planifie les explorations afin de réduire les calculs redondants.
 
 Une extension optionnelle concerne le **Top-k Temporal Closeness** (Oettershagen et Mutzel, 2020)  
 pour les graphes temporels.
@@ -16,7 +15,7 @@ pour les graphes temporels.
 
 ## 🧩 Objectifs du projet
 
-1. Implémenter les deux algorithmes de centralité (classique et efficient).  
+1. Implémenter les trois algorithmes de centralité (classique, efficient et temporal).  
 2. Tester et comparer leurs performances sur plusieurs graphes de villes (via **OSMNX**).  
 3. Identifier les **5 nœuds les plus centraux** pour chaque ville.  
 4. Visualiser les résultats et **comparer les temps d’exécution** à l’aide de graphiques.  
@@ -34,39 +33,36 @@ Projet_AAGA/
 │   ├── classic_closeness/
 │   │   └── classic_closeness.py
 │   ├── efficient_closeness/
+│   │   ├── Sketch.py.py
 │   │   └── top_k_closeness.py
 │   ├── temporal_closeness/
 │   │   ├── topk_temporal_closeness.py
+│   │   ├── fastest_path.py
 │   │   ├── dynamic_topk_temporal_closeness.py
 │   │   └── benchmark_osmnx.py
 │   ├── utils/
 │   │   └── graph_utils.py
 │   ├── main_classic_closeness.py
 │   ├── main_efficient_closeness.py
-│   ├── compare_algorithms_no_oriented_graph.py
-│   ├── compare_algorithms_oriented_graph.py
-│   └── ...
+│   ├── compare_algorithms.py
+│   └── compare_algorithms_wiki_vote.py
 │
 ├── data/
 │   ├── Paris_France.graphml
 │   ├── Lyon_France.graphml
 │   └── ...
 │
-├── graph/
+├── visualisation/
 │   ├── classic/
 │   ├── efficient/
-│   └── temporel
+│   └── temporel/
 │
 ├── resultat_comparaison/
-│   ├── resume_no_oriented.csv
-│   ├── resume_oriented.csv
-│   ├── bar_no_oriented_comparison.png
-│   ├── bar_oriented_comparison.png
-│   ├── scatter_no_oriented_logscale.png
-│   ├── scatter_oriented_logscale.png
-│   ├── speedup_no_oriented.png
-│   ├── speedup_oriented.png
-│   └── ...
+│   ├── resume.csv
+│   ├── bar.png
+│   ├── scatter_logscale.png
+│   ├── speedup.png
+│   └── execution_times_WikiVote.png
 │
 ├── run_all_simulations.sh
 │
@@ -125,14 +121,26 @@ En plus des comparaisons globales, le projet comprend **trois scripts autonomes*
 * Implémente l’algorithme **classique** (BFS pour chaque nœud).
 * Affiche les **5 nœuds ayant la plus forte centralité**.
 * Génère un graphique du graphe de la ville avec les **nœuds Top-5 surlignés en rouge**.
-* Sauvegarde les figures dans le dossier `graph/classic/`.
+* Sauvegarde les figures dans le dossier `visualisation/classic/`.
+
+Vous pouvez le lancer avec :
+```bash
+cd src
+python3 main_classic_closeness.py
+```
 
 ### 2️⃣ `main_efficient_closeness.py`
 
 * Implémente l’algorithme **efficient** (Olsen et al., 2014).
 * Affiche les **5 nœuds les plus centraux** calculés plus rapidement.
 * Produit un graphe équivalent à celui du classique, avec les Top-5 en rouge.
-* Sauvegarde les figures dans `graph/efficient/`.
+* Sauvegarde les figures dans `visualisation/efficient/`.
+
+Vous pouvez le lancer avec :
+```bash
+cd src
+python3 main_efficient_closeness.py
+```
 
 ### 3️⃣ `temporal_closeness/benchmark_osmnx.py`
 
@@ -143,7 +151,13 @@ En plus des comparaisons globales, le projet comprend **trois scripts autonomes*
   * le nombre de sommets et d’arêtes,
   * le paramètre `k`,
   * le temps d’exécution de chaque algorithme.
-* Sauvegarde les graphiques dans `graph/temporel`.
+* Sauvegarde les graphiques dans `visualisation/temporel`.
+
+Vous pouvez le lancer avec :
+```bash
+cd src\temporal_closeness
+python3 benchmark_osmnx.py
+```
 
 ---
 
@@ -170,7 +184,7 @@ Les graphes sont obtenus via **OSMNX** :
 
 ## 📊 Résultats visuels de la comparaison
 
-### Exemple de tableau généré (`resume_no_oriented.csv`)
+### Exemple de tableau généré (`resume.csv`)
 
 | Ville | V    | E     | Temps_classique (s) | Temps_efficient (s) | Gain (%) | Speed-up (×) | Overlap (%) |
 | ----- | ---- | ----- | ------------------- | ------------------- | -------- | ------------ | ----------- |
@@ -182,16 +196,13 @@ Les graphes sont obtenus via **OSMNX** :
 
 ### Graphiques produits
 
-* `bar_no_oriented_comparison.png` → comparaison Classic vs Efficient (non orienté)
-* `bar_oriented_comparison.png` → comparaison Classic vs Efficient (orienté)
-* `scatter_no_oriented_logscale.png` → temps log-scale selon |V| (non orienté)
-* `scatter_oriented_logscale.png` → temps log-scale selon |V| (orienté)
-* `speedup_no_oriented.png` → facteur d’accélération (non orienté)
-* `speedup_oriented.png` → facteur d’accélération (orienté)
+* `bar.png` → comparaison Classic vs Efficient
+* `scatter_logscale.png` → temps log-scale selon |V| 
+* `speedup.png` → facteur d’accélération 
 * `execution_times_WikiVote.png` → comparaison sur le graphe Wiki-Vote
-* `graph/classic/*.png` → top-5 du classique
-* `graph/efficient/*.png` → top-5 de l’efficient
-* `src/temporal_closeness/results/*.png` → top-5 temporel
+* `visualisation/classic/*.png` → top-5 du classique
+* `visualisation/efficient/*.png` → top-5 de l’efficient
+* `visualisation/temporel/*.png` → top-5 temporel
 
 ---
 
@@ -206,11 +217,10 @@ chmod +x run_all_simulations.sh
 
 Ce script :
 
-1. Exécute les **algorithmes classiques et efficients** pour générer les visualisations top-5.
-2. Lance les **comparaisons non orientées** et **orientées**.
-3. Exécute le **benchmark du top-k temporal closeness**.
-4. Génère automatiquement tous les fichiers `.csv` et `.png`.
-5. Affiche le résumé final dans le terminal.
+1. Exécute les **algorithmes classiques et efficients et temporal** pour générer les visualisations top-5.
+2. Lance les **comparaisons**.
+3. Génère automatiquement tous les fichiers `.csv` et `.png`.
+4. Affiche le résumé final dans le terminal.
 
 ---
 

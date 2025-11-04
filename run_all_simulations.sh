@@ -2,13 +2,12 @@
 # ==========================================================
 # 🚀 Script global de lancement — Projet AAGA : Top-k Closeness
 # ==========================================================
-# Auteur : Projet AAGA (M2 STL - Sorbonne)
+# Objet : Projet AAGA (M2 STL - Sorbonne)
 # Description :
 #   Ce script exécute automatiquement :
-#     1. Les algorithmes de closeness classiques et efficients (main)
-#     2. Les comparaisons sur graphes orientés et non orientés
-#     3. Les comparaisons sur d'autres graphes orientés (WikiVote, Web-Google)
-#     4. Le benchmark du top-k temporal closeness
+#     1. Les algorithmes de closeness classiques et efficients et temporal (main)
+#     2. Les comparaisons sur des graphes de différents villes de france
+#     3. Les comparaisons sur un autres graphe (WikiVote)
 # ==========================================================
 
 # Répertoire du projet
@@ -27,7 +26,7 @@ echo ""
 # ----------------------------------------------------------
 # 1️⃣ Algorithme classique — Visualisation top-5
 # ----------------------------------------------------------
-echo "➡️  [1/6] Exécution de l'algorithme classique..."
+echo "➡️  [1/5] Exécution de l'algorithme classique..."
 python3 "$SRC_DIR/main_classic_closeness.py"
 if [ $? -ne 0 ]; then
   echo "❌ Erreur : main_classic_closeness.py"
@@ -39,7 +38,7 @@ echo ""
 # ----------------------------------------------------------
 # 2️⃣ Algorithme efficient — Visualisation top-5
 # ----------------------------------------------------------
-echo "➡️  [2/6] Exécution de l'algorithme efficient..."
+echo "➡️  [2/5] Exécution de l'algorithme efficient..."
 python3 "$SRC_DIR/main_efficient_closeness.py"
 if [ $? -ne 0 ]; then
   echo "❌ Erreur : main_efficient_closeness.py"
@@ -49,45 +48,9 @@ echo "✅ Algorithme efficient terminé."
 echo ""
 
 # ----------------------------------------------------------
-# 3️⃣ Comparaison non orientée
+# 3️⃣ Benchmark top-k temporal closeness — Visualisation top-5
 # ----------------------------------------------------------
-echo "➡️  [3/6] Comparaison sur graphes non orientés..."
-python3 "$SRC_DIR/compare_algorithms_no_oriented_graph.py"
-if [ $? -ne 0 ]; then
-  echo "❌ Erreur : comparaison non orientée"
-  exit 1
-fi
-echo "✅ Comparaison non orientée terminée."
-echo ""
-
-# ----------------------------------------------------------
-# 4️⃣ Comparaison orientée
-# ----------------------------------------------------------
-echo "➡️  [4/6] Comparaison sur graphes orientés..."
-python3 "$SRC_DIR/compare_algorithms_oriented_graph.py"
-if [ $? -ne 0 ]; then
-  echo "❌ Erreur : comparaison orientée"
-  exit 1
-fi
-echo "✅ Comparaison orientée terminée."
-echo ""
-
-# ----------------------------------------------------------
-# 5️⃣ Comparaison sur autres graphes orientés (Wiki-Vote)
-# ----------------------------------------------------------
-echo "➡️  [5/6] Comparaison sur autres graphes orientés..."
-python3 "$SRC_DIR/compare_algorithms_oriented_others.py"
-if [ $? -ne 0 ]; then
-  echo "❌ Erreur : compare_algorithms_oriented_others.py"
-  exit 1
-fi
-echo "✅ Comparaison sur autres graphes orientés terminée."
-echo ""
-
-# ----------------------------------------------------------
-# 6️⃣ Benchmark top-k temporal closeness
-# ----------------------------------------------------------
-echo "➡️  [6/6] Benchmark du top-k temporal closeness..."
+echo "➡️  [3/5] Benchmark du top-k temporal closeness..."
 python3 "$SRC_DIR/temporal_closeness/benchmark_osmnx.py"
 if [ $? -ne 0 ]; then
   echo "❌ Erreur : benchmark_osmnx.py"
@@ -95,6 +58,32 @@ if [ $? -ne 0 ]; then
 fi
 echo "✅ Benchmark temporel terminé."
 echo ""
+
+# ----------------------------------------------------------
+# 4️⃣ Comparaison
+# ----------------------------------------------------------
+echo "➡️  [4/5] Comparaison sur les graphes de villes ..."
+python3 "$SRC_DIR/compare_algorithms.py"
+if [ $? -ne 0 ]; then
+  echo "❌ Erreur : comparaison "
+  exit 1
+fi
+echo "✅ Comparaison terminée."
+echo ""
+
+# ----------------------------------------------------------
+# 5️⃣ Comparaison sur autre graphe (Wiki-Vote)
+# ----------------------------------------------------------
+echo "➡️  [5/5] Comparaison sur autre graphe..."
+python3 "$SRC_DIR/compare_algorithms_wiki_vote.py"
+if [ $? -ne 0 ]; then
+  echo "❌ Erreur : compare_algorithms_wiki_vote.py"
+  exit 1
+fi
+echo "✅ Comparaison sur autre graphe terminée."
+echo ""
+
+
 
 # ----------------------------------------------------------
 # Résumé final
