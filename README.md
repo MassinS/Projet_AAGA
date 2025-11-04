@@ -204,8 +204,8 @@ python3 src/temporal_closeness/benchmark_osmnx.py
 
 | Ville | V | E | Temps_classique (s) | Temps_efficient (s) | Gain (%) | Speed-up (×) | Overlap (%) |
 |-------|----|----|---------------------|--------------------|----------|--------------|-------------|
-| Paris | 9434 | 14768 | 87.939 | 55.598 | 36.78 | 1.58 | 20.0 |
-| Lyon  | 4138 | 6434  | 15.895 | 15.767 | 0.81  | 1.01 | 80.0 |
+|Paris  |9443 |	14779 |	264.575	| 53.545 |	79.76 |	4.94 |	20.0 |
+| Lyon	| 4159 |	6471 |	48.334 |	18.376	| 61.98 |	2.63 |	60.0 |
 
 ### Graphiques produits
 
@@ -258,3 +258,4 @@ Université Sorbonne — 2025
 * Étudier l’évolution temporelle de la centralité
 * Ajouter des **graphes aléatoires ou massifs** pour évaluer la scalabilité
 * Comparer avec d’autres mesures : **betweenness**, **eigenvector**, etc.
+
