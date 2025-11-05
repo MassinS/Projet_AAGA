@@ -233,7 +233,7 @@ Ce script exécute automatiquement :
 3. **Comparaisons globales**
 4. **Benchmark du Top-k Temporal Closeness**
 
-➡️ Tous les résultats `.csv` et `.png` sont sauvegardés automatiquement dans `resultat_comparaison/` et `visualisation/`.
+Tous les résultats `.csv` et `.png` sont sauvegardés automatiquement dans `resultat_comparaison/` et `visualisation/`.
 
 ---
 
@@ -258,3 +258,4 @@ Université Sorbonne — 2025
 * Étudier l’évolution temporelle de la centralité
 * Ajouter des **graphes aléatoires ou massifs** pour évaluer la scalabilité
 * Comparer avec d’autres mesures : **betweenness**, **eigenvector**, etc.
+
