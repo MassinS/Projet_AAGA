@@ -82,7 +82,7 @@ print(f"\n📄 Tableau résumé sauvegardé dans : {csv_path}\n")
 print(df.to_markdown(index=False))
 
 # ==========================================================
-# 1️⃣ Graphique en barres (ton ancien)
+# 1 Graphique en barres (ton ancien)
 # ==========================================================
 plt.figure(figsize=(10,6))
 x = range(len(df))
@@ -100,7 +100,7 @@ plt.savefig(bar_path)
 print(f"📊 Graphique en barres enregistré dans : {bar_path}")
 
 # ==========================================================
-# 2️⃣ Nuage de points (log-scale)
+# 2 Nuage de points (log-scale)
 # ==========================================================
 plt.figure(figsize=(8,6))
 plt.scatter(df["|V|"], df["Temps_classique (s)"], color='blue', label='Classic', s=80)
@@ -119,7 +119,7 @@ plt.savefig(scatter_path)
 print(f"📊 Graphique (nuage de points) enregistré dans : {scatter_path}")
 
 # ==========================================================
-# 3️⃣ Graphique du speed-up
+# 3 Graphique du speed-up
 # ==========================================================
 plt.figure(figsize=(8,5))
 plt.bar(df["Ville"], df["Speed-up (×)"], color="green", alpha=0.7)

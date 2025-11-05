@@ -11,11 +11,11 @@ def closeness_centrality_all_nodes(G):
 
     for v in G.nodes():
         
-        # 1️⃣ Initialisation des distances
+        # 1 Initialisation des distances
         dist = {u: float('inf') for u in G.nodes()}
         dist[v] = 0
 
-        # 2️⃣ Parcours en largeur (BFS)
+        # 2 Parcours en largeur (BFS)
         Q = deque([v])
         while Q:
             x = Q.popleft()
@@ -24,12 +24,12 @@ def closeness_centrality_all_nodes(G):
                     dist[y] = dist[x] + 1
                     Q.append(y)
 
-        # 3️⃣ Sommation des distances (uniquement les sommets atteignables)
+        # 3 Sommation des distances (uniquement les sommets atteignables)
         reachable = [u for u in G.nodes() if dist[u] < float('inf')]
         S = sum(dist[u] for u in reachable if u != v)
         r_v = len(reachable)        # |R_v|
 
-        # 4️⃣ Calcul de la centralité normalisée
+        # 4 Calcul de la centralité normalisée
         if S > 0 and r_v > 1:
             # closeness[v] = 1 / S # Méthode de cours "non normaliser"
             closeness[v] = ((r_v - 1) ** 2) / ((n - 1) * S)
