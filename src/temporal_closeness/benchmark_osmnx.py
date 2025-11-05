@@ -176,7 +176,7 @@ if __name__ == "__main__":
     os.makedirs("results", exist_ok=True)
     csv_path = os.path.join("results", "results_osmnx_algo2_oriented.csv")
 
-    print(" Benchmark Algo 2 — Top-k Temporal Closeness (graphe orienté uniquement) ")
+    print(" Benchmark Algo 2 — Top-k Temporal Closeness ( graphe orienté ) ")
 
     for city in cities:
         city_results = benchmark_city(city, k=5)
