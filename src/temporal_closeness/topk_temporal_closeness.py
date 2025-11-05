@@ -3,95 +3,67 @@
 # ==========================================
 
 from temporal_graph import TemporalGraph
-from fastest_path import fastest_paths
+from fastest_path import incremental_fastest_paths
 import heapq
 import time
 
-# --------------------------------------------------
-# Fonction de calcul de la borne supérieure
-# --------------------------------------------------
+# L'algorithme de calcul de la borne supérieure de la closeness
 def compute_upper_bound(S_F, len_T, len_R, len_F, d_next, delta, lambda_min):
     """Calcule la borne supérieure de la closeness courante."""
     return S_F + (len_T / d_next) + ((len_R - len_F - len_T) / (d_next + delta + lambda_min))
 
-
-# --------------------------------------------------
-# Fonction principale
-# --------------------------------------------------
+# Algorithme principal de calcul du top-k temporal closeness avec pruning
+# L'idée principale est d'utiliser le générateur incremental_fastest_paths pour explorer le graphe temporel
+# et de calculer une borne supérieure de la closeness à chaque étape pour décider si on continue l'exploration ou pas.
 def topk_temporal_closeness(G: TemporalGraph, k: int, interval=(0, 100)):
     """
-    Implémente l'algorithme 2 du papier :
-    Calcule le Top-k des sommets selon la centralité de proximité temporelle.
+    Calcule le Top-k des sommets selon la centralité temporelle,
+    avec pruning (arrêt anticipé) pendant le parcours.
     """
-    # --- Initialisation du top-k global ---
     topk = []      # [(closeness, node)]
-    B_k = 0.0      # seuil actuel minimal dans le top-k
+    B_k = 0.0      # seuil minimal du top-k
 
-    # --- Trier les sommets par degré sortant (priorité aux "sources fortes") ---
     sources = sorted(G.V, key=lambda u: len(G.adj[u]), reverse=True)
 
     delta = 0.0
     lambda_min = min(e.l for edges in G.adj.values() for e in edges)
 
-    # --- Boucle principale sur chaque sommet source ---
     for u in sources:
-
-        # 1 Exécuter l’algo 1 pour récupérer les distances minimales
-        d = fastest_paths(G, source=u, interval=interval)
-
-        # 2 Construire R = sommets atteignables
-        R = [v for v in d if d[v] < float("inf")]
-        len_R = len(R)
-        if len_R <= 1:
-            continue  # rien d'atteignable
-
-        # 3 Variables de suivi
+        S_F = 0.0
         F = set()
         T = set()
-        S_F = 0.0
-        d_next = 1.0
+        len_R = len(G.V)  # approximation du nombre de sommets atteignables
 
-        # 4 Parcours des sommets atteignables triés par durée
-        sorted_nodes = sorted([v for v in R if v != u], key=lambda x: d[x])
-
-        for i, v in enumerate(sorted_nodes):
-            duration = d[v]
-            if duration <= 0:
+        # On explore le graphe temporel en direct
+        for (v, duration, d_next) in incremental_fastest_paths(G, u, interval):
+            if duration == 0:
                 continue
 
             F.add(v)
             S_F += 1.0 / duration
 
-            # mise à jour de la "frontière"
+            # mise à jour de la frontière
             for e in G.adj[v]:
                 if e.v not in F:
                     T.add(e.v)
 
-            # prochaine durée
-            if i + 1 < len(sorted_nodes):
-                d_next = d[sorted_nodes[i + 1]]
-            else:
-                d_next = duration  # dernière itération
-
             # calcul de la borne supérieure
             c_hat = compute_upper_bound(S_F, len(T), len_R, len(F), d_next, delta, lambda_min)
 
-            # test de pruning
+            # pruning (si la borne < seuil top-k)
             if c_hat < B_k:
                 break
 
-        # 5 Calcul final de la closeness du sommet u
+        # closeness finale pour ce sommet
         c_u = S_F
 
-        # 6 Mise à jour du Top-k global
+        # mise à jour du top-k
         heapq.heappush(topk, (c_u, u))
         if len(topk) > k:
             heapq.heappop(topk)
         B_k = topk[0][0]
 
-    topk_sorted = sorted(topk, reverse=True)
-
-    return topk_sorted
+    return sorted(topk, reverse=True)
 
 
 # Test local 

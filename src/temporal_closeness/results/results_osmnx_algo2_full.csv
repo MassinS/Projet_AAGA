@@ -1,0 +1,21 @@
+city,nodes,edges,k,algo2_time_s,oriented
+"Paris, France",9213,17862,5,112.112283,True
+"Paris, France",9434,14768,5,96.10612,False
+"Lyon, France",4020,7995,5,9.316622,True
+"Lyon, France",4142,6438,5,9.395951,False
+"Marseille, France",12703,26374,5,187.071701,True
+"Marseille, France",12807,17516,5,252.040619,False
+"Toulouse, France",9103,19291,5,57.804792,True
+"Toulouse, France",9276,13348,5,88.178332,False
+"Bordeaux, France",4327,8796,5,15.463861,True
+"Bordeaux, France",4437,6707,5,12.16619,False
+"Nice, France",3972,8152,5,10.069776,True
+"Nice, France",4023,5511,5,9.811812,False
+"Nantes, France",6496,13993,5,38.091939,True
+"Nantes, France",6614,9027,5,36.408536,False
+"Dijon, France",3124,7120,5,5.79817,True
+"Dijon, France",3187,4699,5,6.936321,False
+"Reims, France",3583,8000,5,8.047576,True
+"Reims, France",3638,5307,5,9.131296,False
+"Annecy, France",4100,8420,5,11.567165,True
+"Annecy, France",4461,6049,5,12.035446,False

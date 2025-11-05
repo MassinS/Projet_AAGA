@@ -9,7 +9,7 @@ from temporal_graph import TemporalGraph
 
 
 
-# Un label décrit "j'atteins v, en partant à s depuis la source, et en arrivant à a"
+# Un label décrit : j'atteins "v", en partant à "s" depuis la source, et en arrivant à "a"
 @dataclass
 class Label:
     v: Any   # sommet d'arrivée
@@ -35,7 +35,7 @@ def _is_dominated(new_label: Label, labels: List[Label]) -> bool:
             return True
     return False
 
-# D'après l'article de Wu et al. (2009) "Fastest Path Computation in Temporal Graphs" , les labels dominés par d'autre labels peuvent etre supprimé.
+# D'après l'article "Efficient Top-k Temporal Closeness Calculation in Temporal Networks" , les labels dominés par d'autre labels peuvent etre supprimé.
 def _prune_dominated(labels: List[Label]) -> List[Label]:
     """
     Optionnel: supprime des labels qui sont dominés par d'autres dans la même liste.
@@ -50,7 +50,8 @@ def _prune_dominated(labels: List[Label]) -> List[Label]:
             kept.append(l)
     return kept
 
-
+# Cet algorithme représente l'implementation de l'algorithme 1 de papier Efficient Top-k Temporal Closeness Calculation in Temporal Graphs de Lutz Oettershagen, Petra Mutzel
+# Remarque : cette fonction n'est pas utilisée directement dans le calcul du top-k temporal closeness, mais elle est fournie ici pour référence.
 def fastest_paths(G, source: Any, interval: Tuple[float, float]) -> Dict[Any, float]:
     """
     Calcule, pour chaque sommet v, la durée minimale temporelle (fastest path)
@@ -131,6 +132,54 @@ def fastest_paths(G, source: Any, interval: Tuple[float, float]) -> Dict[Any, fl
 
     return d
 
+# Cet algorithme  est " the adapted version of fastest_path " .
+# cette fonctione est un générateur qui permet d'explorer le graphe temporel de manière incrémentale
+# cette fonction est utilisée dans l'algorithme de calcul du top-k temporal closeness qui se trouve dans le fichier topk_temporal_closeness.py
+def incremental_fastest_paths(G, source: Any, interval: Tuple[float, float]):
+    """
+    Explore le graphe temporel progressivement et rend (v, durée, prochaine_durée)
+    à chaque fois qu'un nouveau sommet v est atteint avec sa durée minimale.
+    Cela permet de faire du pruning pendant l'exploration.
+    """
+    d: Dict[Any, float] = {v: float('inf') for v in G.V}
+    d[source] = 0.0
+
+    Π: Dict[Any, List[Label]] = {v: [] for v in G.V}
+    Q: List[Tuple[float, int, Label]] = []
+    heapq.heappush(Q, (0.0, 0, Label(v=source, s=0.0, a=0.0)))
+    F: Set[Any] = set()
+
+    counter = 0
+
+    while Q and len(F) < len(G.V):
+        _, _, lab = heapq.heappop(Q)
+        v, s, a = lab.v, lab.s, lab.a
+
+        if v in F:
+            continue
+
+        d[v] = a - s
+        F.add(v)
+
+        # prochaine durée 
+        next_d = Q[0][0] if Q else d[v]
+
+        # on "rend" les infos du sommet découvert
+        yield (v, d[v], next_d)
+
+        # exploration des arêtes sortantes
+        for e in G.get_out_edges(v, interval):
+            if a <= e.t:  # respect de la causalité temporelle
+                s_prime = s if s != 0 else e.t
+                a_prime = e.t + e.l
+                new_lab = Label(v=e.v, s=s_prime, a=a_prime)
+
+                if not _is_dominated(new_lab, Π[e.v]):
+                    Π[e.v].append(new_lab)
+                    Π[e.v] = _prune_dominated(Π[e.v])
+                    counter += 1
+                    heapq.heappush(Q, (new_lab.duration, counter, new_lab))
+
 
 # Test local 
 if __name__ == "__main__":
@@ -151,7 +200,7 @@ if __name__ == "__main__":
     interval = (0, 20)
     print(f"=== Fastest paths depuis 'A' dans l'intervalle {interval} ===")
 
-    d = fastest_paths(G, source="A", interval=interval)
+    d = fastest_paths(G, source="B", interval=interval)
 
     for v in sorted(G.V):
         print(f"{v} : {d[v]}")
